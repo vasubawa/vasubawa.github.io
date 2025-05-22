@@ -3,10 +3,6 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-// Import portfolio data (will be available from window.portfolioData in browser)
-// We're checking for window to handle SSR scenarios
-const portfolioData = typeof window !== 'undefined' ? window.portfolioData : null;
-
 /**
  * Button component with click counter functionality
  * @param {Object} props - Component props
@@ -43,7 +39,7 @@ function App() {
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
         </div>
-        <h1>{personalInfo.fullName || personalInfo.name}'s Portfolio</h1>
+        <h1>{personalInfo.name}'s Portfolio</h1>
         <p className="subtitle">{personalInfo.title}</p>
       </header>
       
