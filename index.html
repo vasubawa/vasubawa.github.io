@@ -5,51 +5,13 @@
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Portfolio</title>
-		<style>
-			body,
-			html {
-				margin: 0;
-				padding: 0;
-				height: 100%;
-				overflow: hidden;
-			}
-			#terminal-container {
-				display: none;
-				position: fixed;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-				z-index: 999;
-				background: #0a0a0a;
-			}
-			#terminal-frame {
-				border: none;
-				width: 100%;
-				height: 100%;
-			}
-			.view-toggle {
-				position: fixed;
-				top: 10px;
-				right: 10px;
-				z-index: 1000;
-			}
-			.toggle-button {
-				background: #222;
-				color: #c0c0c0;
-				border: 1px solid #444;
-				padding: 6px 12px;
-				font-family: monospace;
-				font-size: 0.85rem;
-				cursor: pointer;
-				outline: none;
-				border-radius: 2px;
-			}
-		</style>
-		<script type="module" crossorigin src="/assets/index-Buo0VS5-.js"></script>
-		<link rel="stylesheet" crossorigin href="/assets/index-D8b4DHJx.css">
+		<script type="module" crossorigin src="/assets/index-DVKSh6i4.js"></script>
+		<link rel="stylesheet" crossorigin href="/assets/index-DQI2EEm_.css">
 	</head>
 	<body>
+		<div id="loading" class="loading">
+			<div class="loading-spinner"></div>
+		</div>
 		<div class="view-toggle">
 			<button id="toggle-view" class="toggle-button">
 				Switch to Terminal
@@ -64,26 +26,6 @@
 			<iframe id="terminal-frame" src="terminal.html"></iframe>
 		</div>
 
-		<script>
-			document
-				.getElementById("toggle-view")
-				.addEventListener("click", function () {
-					const terminalContainer =
-						document.getElementById("terminal-container");
-					const reactRoot = document.getElementById("root");
-
-					if (terminalContainer.style.display === "block") {
-						// Switch to GUI
-						terminalContainer.style.display = "none";
-						reactRoot.style.display = "block";
-						this.textContent = "Switch to Terminal";
-					} else {
-						// Switch to Terminal
-						terminalContainer.style.display = "block";
-						reactRoot.style.display = "none";
-						this.textContent = "Switch to GUI";
-					}
-				});
-		</script>
+		<!-- Load portfolio data -->
 	</body>
 </html>
