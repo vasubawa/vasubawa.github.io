@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync, existsSync } from 'fs';
+import { copyFileSync, mkdirSync, existsSync, renameSync } from 'fs';
 import { join, resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -18,7 +18,10 @@ const files = [
 // Destination directory
 const destDir = join(__dirname, 'dist');
 
-console.log('Copying terminal files to dist directory...');
+// Get timestamp for logging
+const timestamp = new Date().toLocaleTimeString();
+
+console.log(`[${timestamp}] Copying terminal files to dist directory...`);
 
 // Copy each file
 files.forEach(file => {
@@ -34,11 +37,22 @@ files.forEach(file => {
       }
     }
     
+    // Create backup if file exists
+    if (existsSync(destPath)) {
+      const backupPath = `${destPath}.bak`;
+      renameSync(destPath, backupPath);
+    }
+    
     copyFileSync(srcPath, destPath);
-    console.log(`✅ Copied ${file} to dist/`);
+    console.log(`[${timestamp}] ✅ Copied ${file} to dist/`);
   } catch (err) {
-    console.error(`❌ Error copying ${file}: ${err.message}`);
+    console.error(`[${timestamp}] ❌ Error copying ${file}: ${err.message}`);
   }
 });
 
-console.log('Done copying terminal files.');
+// Log completion with timestamp
+console.log(`[${timestamp}] Done copying terminal files.`);
+
+// Log build information
+console.log(`[${timestamp}] Build completed at: ${new Date().toLocaleString()}`);
+console.log(`[${timestamp}] Files copied: ${files.length}`);

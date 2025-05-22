@@ -88,15 +88,38 @@ function initTerminal(data) {
             `
         };
         
-        // Update UI
+        // Update UI with animation
         const allItems = document.querySelectorAll('.left-pane .list li');
         allItems.forEach(item => item.classList.remove('active'));
         
         const skillItem = document.querySelector(`.left-pane .list li[data-skill-index="${skillIndex}"]`);
-        if (skillItem) skillItem.classList.add('active');
+        if (skillItem) {
+            skillItem.classList.add('active');
+            
+            // Add animation to the selected skill item
+            skillItem.classList.add('item-selected-animation');
+            setTimeout(() => {
+                skillItem.classList.remove('item-selected-animation');
+            }, 300);
+        }
         
-        contentPane.innerHTML = sections[tempSectionId].content;
-        document.querySelector('.terminal-bar').textContent = sections[tempSectionId].title;
+        // Apply fade-out animation
+        contentPane.classList.add('content-fade-out');
+        
+        // After a short delay, update content and fade back in
+        setTimeout(() => {
+            contentPane.innerHTML = sections[tempSectionId].content;
+            document.querySelector('.terminal-bar').textContent = sections[tempSectionId].title;
+            
+            // Trigger fade-in animation
+            contentPane.classList.remove('content-fade-out');
+            contentPane.classList.add('content-fade-in');
+            
+            // Remove the animation class after completion
+            setTimeout(() => {
+                contentPane.classList.remove('content-fade-in');
+            }, 300);
+        }, 150);
     }
 
     // Random quote from the data
@@ -306,20 +329,43 @@ function initTerminal(data) {
         
         // Add active class to current item
         const activeItem = document.querySelector(`.left-pane .list li[data-section="${sectionId}"]`);
-        if (activeItem) activeItem.classList.add('active');
+        if (activeItem) {
+            activeItem.classList.add('active');
+            
+            // Add animation to the active item
+            activeItem.classList.add('item-selected-animation');
+            setTimeout(() => {
+                activeItem.classList.remove('item-selected-animation');
+            }, 300);
+        }
         
-        // Update content and title
+        // Update content and title with animation
         if (sections[sectionId]) {
             // For skills section, regenerate content every time
             if (sectionId === 'skills-all') {
                 sections[sectionId].content = generateAllSkillsContent(data.skills || {});
             }
             
-            contentPane.innerHTML = sections[sectionId].content;
-            document.querySelector('.terminal-bar').textContent = sections[sectionId].title;
+            // Apply fade-out animation
+            contentPane.classList.add('content-fade-out');
             
-            // Attach click handlers to skill items in content
-            attachSkillItemClickHandlers();
+            // After a short delay, update content and fade back in
+            setTimeout(() => {
+                contentPane.innerHTML = sections[sectionId].content;
+                document.querySelector('.terminal-bar').textContent = sections[sectionId].title;
+                
+                // Attach click handlers to skill items in content
+                attachSkillItemClickHandlers();
+                
+                // Trigger fade-in animation
+                contentPane.classList.remove('content-fade-out');
+                contentPane.classList.add('content-fade-in');
+                
+                // Remove the animation class after completion
+                setTimeout(() => {
+                    contentPane.classList.remove('content-fade-in');
+                }, 300);
+            }, 150);
         } else {
             contentPane.innerHTML = `
                 <div class="section-content">
@@ -340,12 +386,26 @@ function initTerminal(data) {
             
             item.addEventListener('click', function(event) {
                 event.preventDefault();
+                
+                // Add click animation
+                this.classList.add('item-selected-animation');
+                setTimeout(() => {
+                    this.classList.remove('item-selected-animation');
+                }, 300);
+                
                 showSkillDetails(skillIndex);
             });
             
             item.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault();
+                    
+                    // Add click animation
+                    this.classList.add('item-selected-animation');
+                    setTimeout(() => {
+                        this.classList.remove('item-selected-animation');
+                    }, 300);
+                    
                     showSkillDetails(skillIndex);
                 }
             });
@@ -354,7 +414,6 @@ function initTerminal(data) {
     
     // Handle keyboard navigation
     function handleKeyboardNavigation(event) {
-        console.log('Keyboard event:', event.key);
         // Arrow key navigation
         if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
             event.preventDefault();
@@ -368,7 +427,7 @@ function initTerminal(data) {
         }
         
         // Number keys for direct section selection
-        if (["1", "2", "3", "4", "5"].includes(event.key)) {
+        if (['1', '2', '3', '4', '5'].includes(event.key)) {
             event.preventDefault();
             navigateToSectionByNumber(event.key);
         }
@@ -389,9 +448,24 @@ function initTerminal(data) {
                 nextIndex = (currentIndex + 1) % items.length;
             }
             
-            const section = items[nextIndex].getAttribute('data-section');
-            if (section) {
-                setActiveSection(section);
+            // Get the next section or skill item
+            const nextItem = items[nextIndex];
+            if (nextItem) {
+                const section = nextItem.getAttribute('data-section');
+                const skillIndex = nextItem.getAttribute('data-skill-index');
+                
+                if (section) {
+                    setActiveSection(section);
+                } else if (skillIndex !== null) {
+                    // It's a skill item, show its details
+                    showSkillDetails(parseInt(skillIndex));
+                }
+                
+                // Add animation to the selected item
+                nextItem.classList.add('item-selected-animation');
+                setTimeout(() => {
+                    nextItem.classList.remove('item-selected-animation');
+                }, 300);
             }
         }
     }
@@ -412,15 +486,19 @@ function initTerminal(data) {
                 nextSectionIndex = (currentSectionIndex + 1) % sections.length;
             }
             
-            // Select the first item in the next section
+            // Add animation to the next section
             const nextSection = sections[nextSectionIndex];
-            if (nextSection) {
-                const firstItem = nextSection.querySelector('.list li');
-                if (firstItem) {
-                    const section = firstItem.getAttribute('data-section');
-                    if (section) {
-                        setActiveSection(section);
-                    }
+            nextSection.classList.add('section-highlight');
+            setTimeout(() => {
+                nextSection.classList.remove('section-highlight');
+            }, 300);
+            
+            // Select the first item in the next section
+            const firstItem = nextSection.querySelector('.list li');
+            if (firstItem) {
+                const section = firstItem.getAttribute('data-section');
+                if (section) {
+                    setActiveSection(section);
                 }
             }
         }
@@ -433,6 +511,13 @@ function initTerminal(data) {
         
         if (sectionIndex < sections.length) {
             const section = sections[sectionIndex];
+            
+            // Add animation to the selected section
+            section.classList.add('section-highlight');
+            setTimeout(() => {
+                section.classList.remove('section-highlight');
+            }, 300);
+            
             const firstItem = section.querySelector('.list li');
             
             if (firstItem) {
@@ -460,6 +545,13 @@ function initTerminal(data) {
         // Add click listener
         item.addEventListener('click', function(event) {
             event.preventDefault();
+            
+            // Add click animation
+            this.classList.add('item-selected-animation');
+            setTimeout(() => {
+                this.classList.remove('item-selected-animation');
+            }, 300);
+            
             setActiveSection(section);
         });
     });
@@ -504,12 +596,5 @@ document.addEventListener('DOMContentLoaded', function() {
                 </div>
             `;
         }
-    }
-    
-    // Ensure the main container is focusable and focused on load
-    const main = document.querySelector('main.right-pane');
-    if (main) {
-        main.setAttribute('tabindex', '-1');
-        main.focus();
     }
 });
