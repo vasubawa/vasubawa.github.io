@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Terminal Portfolio</title>
+		<link rel="stylesheet" href="terminal.css" />
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+			rel="stylesheet" />
+	</head>
+	<body>
+		<div class="view-toggle">
+			<button id="toggle-gui" class="toggle-button">Switch to GUI</button>
+		</div>
+		<div class="split-pane">
+			<aside class="left-pane">
+				<div class="section" id="intro-section">
+					<div class="section-title">Home</div>
+					<ul class="list" id="home-list">
+						<li class="active" data-section="home">
+							Hello! I'm Dhruv! a passionate software dev. :)
+						</li>
+					</ul>
+				</div>
+				<div class="section" id="projects-section">
+					<div class="section-title">Projects</div>
+					<ul class="list" id="proj-list">
+						<li data-section="proj-1">This Website!</li>
+					</ul>
+					<div class="list-footer" id="proj-footer"></div>
+				</div>
+				<div class="section" id="skills-section">
+					<div class="section-title">Skills • Tools</div>
+					<ul class="list" id="skills-list">
+						<li data-section="skills-1">Java</li>
+						<li data-section="skills-2">C/C++</li>
+						<li data-section="skills-3">HTML</li>
+						<li data-section="skills-4">CSS</li>
+						<li data-section="skills-5">JavaScript</li>
+						<li data-section="skills-6">TypeScript</li>
+						<li data-section="skills-7">Node.js</li>
+						<li data-section="skills-11">React</li>
+						<li data-section="skills-15">AI</li>
+						<li data-section="skills-17">Linux</li>
+					</ul>
+					<div class="list-footer" id="skills-footer"></div>
+				</div>
+				<div class="keyboard-hints">
+					<span>&lt;up&gt;/&lt;down&gt;</span>: Scroll,
+					<span>&lt;left&gt;/&lt;right&gt;</span>: Switch section,
+					<span>&lt;1-4&gt;</span>: Jump to section,
+					<span>&lt;up&gt;/&lt;down&gt;</span>: Switch item (or just
+					use the mouse)
+				</div>
+			</aside>
+			<div class="right-container">
+				<div class="terminal-bar">Home</div>
+				<main class="right-pane" id="content-pane"></main>
+			</div>
+		</div>
+		<script src="terminal.js"></script>
+	</body>
+</html>
