@@ -2,8 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add toggle functionality to switch between terminal and GUI
     const toggleButton = document.getElementById('toggle-gui');
     toggleButton.addEventListener('click', function() {
-        // Navigate to the root URL (GUI version)
-        window.location.replace('./');
+        // Check if we're in an iframe
+        if (window !== window.parent) {
+            // We're in an iframe, communicate with the parent window
+            window.parent.document.getElementById('toggle-view').click();
+        } else {
+            // Direct navigation if accessed directly
+            window.location.replace('./');
+        }
     });
     
     const sections = {
