@@ -1,0 +1,515 @@
+/* Terminal Portfolio - Consolidated Styles
+ * Contains all styles for the terminal interface including:
+ * - Main layout and structure
+ * - Content styling
+ * - Project sections
+ * - Skills and tools
+ * - Experience and education
+ * - Interactive elements
+ */
+
+/* ===== GENERAL LAYOUT STYLES ===== */
+body {
+  margin: 0;
+  background: #0a0a0a;
+  color: #c0c0c0;
+  font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  font-size: 14px;
+}
+
+.view-toggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  z-index: 1000;
+}
+
+.toggle-button {
+  background: #222;
+  color: #c0c0c0;
+  border: 1px solid #444;
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s ease;
+  border-radius: 2px;
+}
+
+.toggle-button:hover {
+  background: #333;
+  color: #fff;
+}
+
+.right-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-bar {
+  background: #0a0a0a;
+  color: #c0c0c0;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.split-pane {
+  display: flex;
+  flex: 1 1 auto;
+  min-height: 0;
+  background: #0a0a0a;
+  border-top: 1px solid #1a1a1a;
+}
+
+.left-pane {
+  width: 340px;
+  background: #0a0a0a;
+  border-right: 1px solid #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  min-width: 220px;
+  max-width: 400px;
+  padding: 0;
+}
+
+.left-pane .section {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.left-pane .section:last-child {
+  border-bottom: none;
+}
+
+.left-pane .section-title {
+  color: #ffffff;
+  font-size: 0.95rem;
+  margin: 0;
+  padding: 0.4rem 0.8rem;
+  letter-spacing: 0.03em;
+  font-weight: 700;
+  border-bottom: 1px solid #1a1a1a;
+  background-color: #0a0a0a;
+}
+
+.left-pane .list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.left-pane .list li {
+  padding: 0.15rem 0.8rem;
+  cursor: pointer;
+  color: #c0c0c0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background 0.15s, color 0.15s;
+  font-size: 0.9rem;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.left-pane .list li.active, .left-pane .list li:hover {
+  background: none;
+  color: #ffffff;
+}
+
+.left-pane .list li .org {
+  color: #888888;
+  font-size: 0.9em;
+  margin-left: 0.5em;
+  font-weight: 400;
+}
+
+.left-pane .list li .org.orange {
+  color: #ff8800;
+}
+
+.left-pane .list li .org.cyan {
+  color: #00aaff;
+}
+
+.left-pane .list li .org.green {
+  color: #00ff00;
+}
+
+.left-pane .list li .org.yellow {
+  color: #ffcc00;
+}
+
+.left-pane .list li .org.red {
+  color: #ff0000;
+}
+
+.left-pane .list li .org.blue {
+  color: #0088ff;
+}
+
+.left-pane .list li .org.purple {
+  color: #aa00ff;
+}
+
+.left-pane .list-footer {
+  color: #666666;
+  font-size: 0.85em;
+  text-align: right;
+  margin: 0.2em 0.7em 0.5em 0;
+  font-family: inherit;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+.left-pane .keyboard-hints {
+  color: #666666;
+  font-size: 0.8rem;
+  border-top: 1px solid #1a1a1a;
+  background: #0a0a0a;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0.7rem;
+  font-weight: 400;
+  margin-top: auto;
+}
+
+.right-pane {
+  flex: 1 1 0;
+  padding: 1.5rem;
+  background: #0a0a0a;
+  overflow-y: auto;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* ===== GENERAL CONTENT STYLES ===== */
+.section-content {
+  padding: 15px;
+  display: block; /* Ensure content is displayed */
+  width: 100%;
+  overflow: auto;
+  max-height: calc(100vh - 30px); /* Adjust for terminal bar height */
+  box-sizing: border-box;
+}
+
+.section-content h1 {
+  color: #8BE9FD;
+  margin-top: 0;
+  font-size: 1.4em;
+  margin-bottom: 10px;
+}
+
+.ascii-art {
+  font-family: 'JetBrains Mono', 'Fira Mono', 'Consolas', 'Menlo', 'Monaco', monospace;
+  color: #ffffff;
+  font-size: 1rem;
+  line-height: 1;
+  margin-bottom: 2rem;
+  white-space: pre;
+  text-align: left;
+}
+
+.right-pane .desc {
+  color: #c0c0c0;
+  font-size: 0.95rem;
+  margin-bottom: 1.3rem;
+  line-height: 1.5;
+}
+
+.right-pane .desc .highlight {
+  color: #ffffff;
+  background: #222222;
+  border-radius: 0px;
+  padding: 0 0.3em;
+  margin: 0;
+}
+
+.right-pane .desc .keyword {
+  color: #ffcc00;
+  font-weight: bold;
+}
+
+.right-pane .desc .link {
+  color: #0088ff;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.quote {
+  font-style: italic;
+  color: #BD93F9;
+  margin-top: 20px;
+  padding: 10px;
+  border-left: 3px solid #6272A4;
+}
+
+.right-pane .quote {
+  color: #8899aa;
+  background: #111111;
+  border-radius: 0;
+  padding: 0.7em 1em;
+  margin: 1.5em 0 0.5em 0;
+  font-size: 0.95em;
+  font-style: italic;
+  border: none;
+  border-left: 3px solid #333;
+}
+
+.right-pane .footer-links {
+  margin-top: 1.5em;
+  font-size: 0.9em;
+  color: #0088ff;
+  text-align: right;
+  width: 100%;
+}
+
+.right-pane .footer-links a {
+  color: #0088ff;
+  margin-left: 1em;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+.right-pane .footer-links a:hover {
+  color: #ffffff;
+}
+
+/* ===== PROJECT SECTION STYLES ===== */
+.tech-list {
+  margin: 15px 0;
+}
+
+.tech-list .label {
+  color: #FF79C6;
+  font-weight: bold;
+  margin-right: 8px;
+}
+
+.tech-badge {
+  display: inline-block;
+  background: #44475A;
+  padding: 2px 8px;
+  border-radius: 3px;
+  color: #F8F8F2;
+  margin: 2px;
+  font-size: 0.9em;
+}
+
+/* ===== LINKS AND BUTTONS ===== */
+.links {
+  margin-top: 15px;
+}
+
+.link {
+  display: inline-block;
+  background: #50FA7B;
+  color: #282A36;
+  padding: 5px 12px;
+  margin-right: 10px;
+  border-radius: 3px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  background: #6BE088;
+  transform: translateY(-2px);
+}
+
+/* ===== SKILL SECTION STYLES ===== */
+.skill-category {
+  margin-bottom: 20px;
+}
+
+.skill-category h2 {
+  color: #FF79C6;
+  margin: 10px 0;
+  font-size: 1.2em;
+}
+
+.skills-list {
+  margin-left: 10px;
+}
+
+.skill-item {
+  margin-bottom: 15px;
+  display: block;
+  background-color: rgba(68, 71, 90, 0.3);
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  position: relative;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.skill-item:hover {
+  background-color: rgba(68, 71, 90, 0.5);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.skill-name {
+  color: #50FA7B;
+  font-weight: bold;
+  display: block;
+  margin-bottom: 6px;
+  font-size: 1.05em;
+  position: relative;
+}
+
+.skill-name::after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  color: #FF79C6;
+}
+
+.skill-item:hover .skill-name::after {
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.skill-description {
+  color: #F8F8F2;
+  display: block;
+  font-size: 0.9em;
+  border-left: 2px solid #6272A4;
+  padding-left: 10px;
+  line-height: 1.4;
+}
+
+.skills-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 10px;
+}
+
+/* Individual skill display styles */
+.skill-category-label {
+  color: #FF79C6;
+  margin: 5px 0 15px 0;
+  font-size: 0.9em;
+}
+
+.skill-description-section {
+  margin-top: 15px;
+}
+
+.skill-description-section h2 {
+  color: #8BE9FD;
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+/* Tooltip to indicate skill is clickable */
+.skill-item::after {
+  content: 'Click for details';
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  background-color: #282A36;
+  padding: 3px 8px;
+  border-radius: 3px;
+  font-size: 0.8em;
+  color: #FF79C6;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.skill-item:hover::after {
+  opacity: 1;
+}
+
+/* ===== EXPERIENCE SECTION STYLES ===== */
+.position {
+  color: #50FA7B;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.period {
+  color: #FF79C6;
+  font-style: italic;
+  margin-bottom: 10px;
+}
+
+/* Additional styles for the terminal design */
+.keyboard-hints span {
+  color: #ffffff;
+}
+
+.backend-focused {
+  color: #ff8800;
+}
+
+.father {
+  color: #ff8800;
+}
+
+.full-stack {
+  color: #0088ff;
+}
+
+.ux-design {
+  color: #ff8800;
+}
+
+.passionate {
+  color: #ff8800;
+}
+
+.linkedin {
+  color: #0088ff;
+  text-decoration: underline;
+}
+
+.github {
+  color: #0088ff;
+  text-decoration: underline;
+}
+
+.resume {
+  color: #ff8800;
+  text-decoration: underline;
+}
+
+.experiences {
+  color: #ff8800;
+  text-decoration: underline;
+}
+
+.navigate {
+  color: #ff8800;
+}
+
+.arrow-keys {
+  color: #0088ff;
+}
+
+.vim-motions {
+  color: #ff8800;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .split-pane { flex-direction: column; }
+  .left-pane { width: 100%; max-width: none; border-right: none; border-bottom: 1px solid #333; }
+  .right-pane { padding: 1rem; }
+}

@@ -4,10 +4,30 @@
 		<meta charset="UTF-8" />
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Vite + React</title>
+		<title>Portfolio</title>
+		<link rel="stylesheet" href="./src/index.css" />
 	</head>
 	<body>
+		<div id="loading" class="loading">
+			<div class="loading-spinner"></div>
+		</div>
+		<div class="view-toggle">
+			<button id="toggle-view" class="toggle-button">
+				Switch to Terminal
+			</button>
+		</div>
+
+		<!-- React App (GUI View) -->
 		<div id="root"></div>
-		<script type="module" src="/src/main.jsx"></script>
+
+		<!-- Terminal View (Hidden by default) -->
+		<div id="terminal-container">
+			<iframe id="terminal-frame" src="terminal.html"></iframe>
+		</div>
+
+		<!-- Load portfolio data -->
+		<script type="module" src="portfolio-data.js"></script>
+		<script type="module" src="./src/main.jsx"></script>
+		<script type="module" src="./src/index.js"></script>
 	</body>
 </html>

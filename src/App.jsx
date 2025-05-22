@@ -3,35 +3,63 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+// Import portfolio data (will be available from window.portfolioData in browser)
+// We're checking for window to handle SSR scenarios
+const portfolioData = typeof window !== 'undefined' ? window.portfolioData : null;
 
+/**
+ * Button component with click counter functionality
+ * @param {Object} props - Component props
+ * @param {number} props.initialCount - Initial count value
+ * @returns {JSX.Element} Button component
+ */
+function CounterButton({ initialCount = 0 }) {
+  const [count, setCount] = useState(initialCount)
+  
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => window.location.href = 'terminal.html'}>
-          Show Terminal (Text)
-        </button>
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
+    <button onClick={() => setCount((prev) => prev + 1)}>
+      count is {count}
+    </button>
+  )
+}
+
+/**
+ * Main App component
+ * @returns {JSX.Element} App component
+ */
+function App() {
+  // Get data from window.portfolioData if available
+  const data = typeof window !== 'undefined' ? window.portfolioData : null;
+  const personalInfo = data?.personal || { name: "Dhruv", title: "Software Developer" };
+  
+  return (
+    <div className="app-container">
+      <header className="app-header">
+        <div className="logo-container">
+          <a href="https://vite.dev" target="_blank" rel="noreferrer">
+            <img src={viteLogo} className="logo" alt="Vite logo" />
+          </a>
+          <a href="https://react.dev" target="_blank" rel="noreferrer">
+            <img src={reactLogo} className="logo react" alt="React logo" />
+          </a>
+        </div>
+        <h1>{personalInfo.fullName || personalInfo.name}'s Portfolio</h1>
+        <p className="subtitle">{personalInfo.title}</p>
+      </header>
+      
+      <main className="app-content">
+        <div className="card">
+          <CounterButton initialCount={0} />
+          <p>
+            Welcome to my portfolio site! Use the toggle button in the top-right corner to switch views.
+          </p>
+        </div>
+        
+        <p className="read-the-docs">
+          {data?.quotes ? data.quotes[Math.floor(Math.random() * data.quotes.length)] : "The best way to predict the future is to invent it."}
         </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      </main>
+    </div>
   )
 }
 
