@@ -2,8 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Add toggle functionality to switch between terminal and GUI
     const toggleButton = document.getElementById('toggle-gui');
     toggleButton.addEventListener('click', function() {
-        // Use relative path for GitHub Pages compatibility
-        window.location.href = './index.html'; // Navigate to the GUI React version
+        // Navigate to the root URL (GUI version)
+        window.location.replace('./');
     });
     
     const sections = {

@@ -33,7 +33,7 @@
 			document
 				.getElementById("toggle-terminal")
 				.addEventListener("click", function () {
-					window.location.href = "./terminal.html";
+					window.location.replace("./terminal"); // Using replace to avoid browser history stacking
 				});
 		</script>
 	</body>
