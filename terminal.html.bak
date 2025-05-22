@@ -9,15 +9,48 @@
 		<link
 			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
 			rel="stylesheet" />
-		<script type="module" crossorigin src="/assets/terminal-BkxEOwKk.js"></script>
-		<link rel="modulepreload" crossorigin href="/assets/portfolio-data-CH7lOtUs.js">
-		<link rel="stylesheet" crossorigin href="/assets/terminal-Bi7ub4eZ.css">
+		<style>
+			/* Hide toggle buttons and terminal bar initially until fully loaded */
+			.view-toggle-corner,
+			.toggle-button.terminal-mode,
+			.terminal-bar {
+				opacity: 0;
+				transition: opacity 0.3s ease;
+			}
+
+			/* Show content when loaded */
+			html.content-loaded .view-toggle-corner,
+			html.content-loaded .toggle-button.terminal-mode,
+			html.content-loaded .terminal-bar {
+				opacity: 1;
+			}
+		</style>
+		<script>
+			// Mark page as loaded only after all content is ready
+			window.addEventListener("load", function () {
+				document.documentElement.classList.add("content-loaded");
+			});
+		</script>
+		<script type="module" crossorigin src="/assets/terminal-ByX8WDME.js"></script>
+		<link rel="modulepreload" crossorigin href="/assets/portfolio-data-C48hvdeD.js">
+		<link rel="stylesheet" crossorigin href="/assets/terminal-B3GibZk5.css">
 	</head>
 	<body>
-		<!-- Load portfolio data first (as module if supported, else as regular script) -->
-		<div class="view-toggle">
-			<button id="toggle-gui" class="toggle-button">Switch to GUI</button>
+		<!-- Loading spinner for terminal view -->
+		<div id="terminal-loading" class="terminal-loading">
+			<div class="terminal-loading-spinner"></div>
 		</div>
+
+		<!-- Load portfolio data first (as module if supported, else as regular script) -->
+
+		<!-- Toggle Button for direct access -->
+		<div id="standalone-toggle" class="view-toggle-corner">
+			<a href="/" class="toggle-button terminal-mode">
+				<span class="toggle-icon">&#9001;</span>
+				<span class="toggle-text">GUI View</span>
+			</a>
+		</div>
+
 		<div class="split-pane">
 			<aside class="left-pane">
 				<div class="section" id="intro-section">
@@ -65,7 +98,15 @@
 				</div>
 			</aside>
 			<div class="right-container">
-				<div class="terminal-bar">Home</div>
+				<div class="terminal-bar">
+					<span class="terminal-title">Home</span>
+					<button
+						id="terminal-toggle-view"
+						class="toggle-button terminal-mode">
+						<span class="toggle-icon">&#9001;</span>
+						<span class="toggle-text">GUI View</span>
+					</button>
+				</div>
 				<main class="right-pane" id="content-pane"></main>
 			</div>
 		</div>

@@ -122,6 +122,6 @@ export default portfolioData;
 // Make data available globally in browser environment for backward compatibility
 try {
   window.portfolioData = portfolioData;
-} catch (e) {
-  // Not in a browser environment, ignore
+} catch {
+  // window is not defined (e.g., in Node.js), ignore error
 }

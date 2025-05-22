@@ -5,17 +5,37 @@
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Portfolio</title>
-		<script type="module" crossorigin src="/assets/main-Cc1jEujX.js"></script>
-		<link rel="modulepreload" crossorigin href="/assets/portfolio-data-CH7lOtUs.js">
-		<link rel="stylesheet" crossorigin href="/assets/main-DQI2EEm_.css">
+		<!-- Inline script to prevent flash of incorrect view on load/refresh -->
+		<script>
+			(function () {
+				// Check localStorage immediately before any content renders
+				try {
+					const viewMode = localStorage.getItem("portfolioViewMode");
+					if (viewMode === "terminal") {
+						// Add a class to body for initial state
+						document.documentElement.classList.add(
+							"terminal-mode-initial"
+						);
+					}
+				} catch (e) {
+					// Ignore errors, default to GUI view
+				}
+			})();
+		</script>
+		<script type="module" crossorigin src="/assets/main-DcDTt3oR.js"></script>
+		<link rel="modulepreload" crossorigin href="/assets/portfolio-data-C48hvdeD.js">
+		<link rel="stylesheet" crossorigin href="/assets/main-CyClf2FR.css">
 	</head>
 	<body>
 		<div id="loading" class="loading">
 			<div class="loading-spinner"></div>
 		</div>
-		<div class="view-toggle">
-			<button id="toggle-view" class="toggle-button">
-				Switch to Terminal
+
+		<!-- Toggle Button (Top Right) -->
+		<div class="view-toggle-corner">
+			<button id="toggle-view" class="toggle-button gui-mode">
+				<span class="toggle-icon">&#9002;</span>
+				<span class="toggle-text">Terminal View</span>
 			</button>
 		</div>
 
@@ -23,7 +43,7 @@
 		<div id="root"></div>
 
 		<!-- Terminal View (Hidden by default) -->
-		<div id="terminal-container">
+		<div id="terminal-container" style="display: none">
 			<iframe id="terminal-frame" src="terminal.html"></iframe>
 		</div>
 

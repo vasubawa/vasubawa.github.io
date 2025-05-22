@@ -20,29 +20,87 @@ body {
   font-size: 14px;
 }
 
-.view-toggle {
+/* Terminal Loading Spinner */
+.terminal-loading {
   position: fixed;
-  top: 10px;
-  right: 10px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0a0a0a;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  transition: opacity 0.15s ease, visibility 0.15s ease;
+}
+
+html.content-loaded .terminal-loading {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.terminal-loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(15, 74, 156, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #0f4a9c;
+  animation: terminal-spin 0.7s linear infinite;
+}
+
+@keyframes terminal-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Fade in animation for terminal content */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+html.content-loaded .split-pane {
+  animation: fadeIn 0.15s ease;
+}
+
+/* View Toggle Button Styles */
+.view-toggle-corner {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
   z-index: 1000;
 }
 
 .toggle-button {
-  background: #222;
-  color: #c0c0c0;
-  border: 1px solid #444;
-  padding: 6px 12px;
-  font-family: inherit;
-  font-size: 0.85rem;
-  cursor: pointer;
-  outline: none;
-  transition: all 0.2s ease;
-  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.8rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 }
 
-.toggle-button:hover {
-  background: #333;
+.toggle-icon {
+  font-size: 1.2rem;
+  margin-right: 0.6rem;
+  display: inline-block;
+}
+
+.terminal-mode {
+  background-color: #0f4a9c;
   color: #fff;
+  border: 1px solid #1e70d5;
+}
+
+.terminal-mode:hover {
+  background-color: #1859b3;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 112, 213, 0.4);
 }
 
 .right-container {
@@ -54,13 +112,30 @@ body {
 .terminal-bar {
   background: #0a0a0a;
   color: #c0c0c0;
-  padding: 0.4rem 0.8rem;
+  padding: 0.5rem 0.8rem;
   font-size: 0.9rem;
   letter-spacing: 0.04em;
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Ensure proper spacing */
   font-weight: 600;
   border-bottom: 1px solid #1a1a1a;
+  opacity: 0; /* Hide by default */
+  transition: opacity 0.15s ease;
+}
+
+html.content-loaded .terminal-bar {
+  opacity: 1; /* Show when content is loaded */
+}
+
+/* Ensure terminal title visibility is controlled */
+.terminal-title {
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+html.content-loaded .terminal-title {
+  opacity: 1;
 }
 
 .split-pane {
@@ -96,7 +171,7 @@ body {
   color: #ffffff;
   font-size: 0.95rem;
   margin: 0;
-  padding: 0.4rem 0.8rem;
+  padding: 0.5rem 0.8rem;
   letter-spacing: 0.03em;
   font-weight: 700;
   border-bottom: 1px solid #1a1a1a;
@@ -280,7 +355,7 @@ body {
   color: #0088ff;
   margin-left: 1em;
   text-decoration: underline;
-  transition: color 0.2s;
+  transition: color 0.15s;
 }
 
 .right-pane .footer-links a:hover {
@@ -322,7 +397,7 @@ body {
   border-radius: 3px;
   text-decoration: none;
   font-weight: bold;
-  transition: all 0.2s ease;
+  transition: all 0.15s ease;
 }
 
 .link:hover {

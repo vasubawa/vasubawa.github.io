@@ -19,6 +19,21 @@ function initTerminal(data) {
         return;
     }
     
+    // Use a shorter delay to ensure all content is fully rendered
+    // before showing any UI elements
+    setTimeout(() => {
+        document.documentElement.classList.add('content-loaded');
+    }, 50);
+    
+    // Check if we're inside an iframe
+    const isInIframe = window !== window.parent;
+    
+    // Handle the standalone toggle button visibility
+    const standaloneToggle = document.getElementById('standalone-toggle');
+    if (standaloneToggle) {
+        standaloneToggle.style.display = isInIframe ? 'none' : 'block';
+    }
+    
     // Extract all skills from portfolio data to display in the sidebar
     function extractAllSkillNames(skillsData) {
         if (!skillsData) return [];
@@ -313,11 +328,24 @@ function initTerminal(data) {
     const contentPane = document.getElementById('content-pane');
     
     // Handle toggle button click to switch between terminal and GUI views
-    function handleToggleClick() {
+    function handleToggleClick(event) {
+        event.preventDefault();
+        
+        // Add visual feedback on click
+        toggleButton.classList.add('button-pressed');
+        setTimeout(() => toggleButton.classList.remove('button-pressed'), 200);
+        
         if (window !== window.parent) {
-            window.parent.document.getElementById('toggle-view').click();
+            // If in iframe, trigger the parent window's toggle function
+            try {
+                window.parent.toggleView(event);
+            } catch {
+                // Fallback if toggle function isn't available
+                window.parent.document.getElementById('toggle-view')?.click();
+            }
         } else {
-            window.location.replace('./');
+            // Direct navigation if not in iframe
+            window.location.href = './';
         }
     }
     
@@ -534,6 +562,14 @@ function initTerminal(data) {
         toggleButton.addEventListener('click', handleToggleClick);
     }
     
+    // Add keyboard shortcut (Ctrl+Shift+T) to toggle between views
+    document.addEventListener('keydown', function(event) {
+        if (event.ctrlKey && event.shiftKey && event.key === 'T') {
+            event.preventDefault(); // Prevent default browser action
+            handleToggleClick(event);
+        }
+    });
+    
     document.addEventListener('keydown', handleKeyboardNavigation);
     
     // Add click event listeners to all section items
@@ -566,6 +602,15 @@ function initTerminal(data) {
 
 // Load portfolio data with error handling
 document.addEventListener('DOMContentLoaded', function() {
+    // Show loading screen and hide content initially
+    document.documentElement.classList.remove('content-loaded');
+    
+    // Set a timer to ensure loading screen is shown for at least a short time
+    // to prevent flashing content
+    setTimeout(() => {
+        document.documentElement.classList.add('content-loaded');
+    }, 500);
+    
     // Try to get portfolio data from global variable first
     if (window.portfolioData) {
         portfolioData = window.portfolioData;
@@ -595,6 +640,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     <div class="desc">The portfolio data could not be loaded. Check the console for details.</div>
                 </div>
             `;
+        }
+    }
+});
+
+// Listen for messages from parent window (when in iframe)
+window.addEventListener('message', function(event) {
+    if (event.data === 'iframe-mode') {
+        console.log('Terminal running in iframe mode');
+        // We're in iframe mode, hide standalone toggle if it exists
+        const standaloneToggle = document.getElementById('standalone-toggle');
+        if (standaloneToggle) {
+            standaloneToggle.style.display = 'none';
+        }
+        
+        // Set up the terminal toggle button to communicate with the parent
+        const terminalToggleBtn = document.getElementById('terminal-toggle-view');
+        if (terminalToggleBtn) {
+            terminalToggleBtn.addEventListener('click', function() {
+                // Send a message to parent window to switch to GUI view
+                window.parent.postMessage('switch-to-gui', '*');
+            });
+        }
+        
+        // Ensure content-loaded class is applied in iframe mode
+        if (!document.documentElement.classList.contains('content-loaded')) {
+            document.documentElement.classList.add('content-loaded');
         }
     }
 });
