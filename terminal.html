@@ -5,7 +5,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Terminal Portfolio</title>
 		<link rel="stylesheet" href="terminal.css" />
-		<link rel="stylesheet" href="terminal-content.css" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
@@ -13,7 +12,7 @@
 			rel="stylesheet" />
 	</head>
 	<body>
-		<!-- Load portfolio data first -->
+		<!-- Load portfolio data first (as module if supported, else as regular script) -->
 		<script src="portfolio-data.js" type="module"></script>
 		<div class="view-toggle">
 			<button id="toggle-gui" class="toggle-button">Switch to GUI</button>
@@ -58,9 +57,8 @@
 					<div class="list-footer" id="skills-footer"></div>
 				</div>
 				<div class="keyboard-hints">
-					<span>&lt;up&gt;/&lt;down&gt;</span>: Scroll,<br />
-					<span>&lt;left&gt;/&lt;right&gt;</span>: Switch section,<br />
 					<span>&lt;1-5&gt;</span>: Jump to section,<br />
+					<span>&lt;left&gt;/&lt;right&gt;</span>: Switch section,<br />
 					<span>&lt;up&gt;/&lt;down&gt;</span>: Switch item (or just
 					use the mouse)<br />
 				</div>

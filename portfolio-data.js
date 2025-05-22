@@ -119,5 +119,9 @@ const portfolioData = {
 // Export the portfolio data
 export default portfolioData;
 
-// Make data available globally in browser environment
-window.portfolioData = portfolioData;
+// Make data available globally in browser environment for backward compatibility
+try {
+  window.portfolioData = portfolioData;
+} catch (e) {
+  // Not in a browser environment, ignore
+}
