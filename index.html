@@ -5,12 +5,36 @@
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Vite + React</title>
-		<script type="module" crossorigin src="/assets/index-DK-xQhXp.js"></script>
+		<script type="module" crossorigin src="/assets/index-Buo0VS5-.js"></script>
 		<link rel="stylesheet" crossorigin href="/assets/index-D8b4DHJx.css">
 	</head>
 	<body>
+		<div
+			class="view-toggle"
+			style="position: fixed; top: 10px; right: 10px; z-index: 1000">
+			<button
+				id="toggle-terminal"
+				style="
+					background: #222;
+					color: #c0c0c0;
+					border: 1px solid #444;
+					padding: 6px 12px;
+					font-family: monospace;
+					font-size: 0.85rem;
+					cursor: pointer;
+					outline: none;
+					border-radius: 2px;
+				">
+				Switch to Terminal
+			</button>
+		</div>
 		<div id="root"></div>
-
-		TESTING TESTING
+		<script>
+			document
+				.getElementById("toggle-terminal")
+				.addEventListener("click", function () {
+					window.location.href = "terminal.html";
+				});
+		</script>
 	</body>
 </html>
