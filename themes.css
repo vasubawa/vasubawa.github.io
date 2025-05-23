@@ -1,0 +1,241 @@
+/* themes.css - Catppuccin theme implementation for terminal portfolio
+ * Contains theme variables for different Catppuccin flavors:
+ * - Latte (Light)
+ * - Frappé (Medium-Dark)
+ * - Macchiato (Dark)
+ * - Mocha (Darkest)
+ */
+
+/* Import Catppuccin from CDN */
+@import url('https://cdn.jsdelivr.net/npm/@catppuccin/palette/css/catppuccin.css');
+
+/* Default theme is Mocha (darkest) */
+:root {
+  /* Base colors */
+  --bg-primary: var(--ctp-mocha-base);
+  --bg-secondary: var(--ctp-mocha-mantle);
+  --border-color: var(--ctp-mocha-surface0);
+  --text-primary: var(--ctp-mocha-text);
+  --text-secondary: var(--ctp-mocha-subtext0);
+  --text-highlight: var(--ctp-mocha-subtext1);
+  --text-muted: var(--ctp-mocha-overlay0);
+  
+  /* Accent Colors */
+  --accent-blue: var(--ctp-mocha-blue);
+  --accent-light-blue: var(--ctp-mocha-sky);
+  --accent-cyan: var(--ctp-mocha-sapphire);
+  --accent-orange: var(--ctp-mocha-peach);
+  --accent-green: var(--ctp-mocha-green);
+  --accent-yellow: var(--ctp-mocha-yellow);
+  --accent-purple: var(--ctp-mocha-mauve);
+  --accent-pink: var(--ctp-mocha-pink);
+  --accent-red: var(--ctp-mocha-red);
+  
+  /* Spacing - unchanged across themes */
+  --space-xs: 0.15rem;
+  --space-sm: 0.5rem;
+  --space-md: 0.8rem;
+  --space-lg: 1rem;
+  --space-xl: 1.5rem;
+  
+  /* Transitions - unchanged across themes */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-slow: 0.3s ease;
+  
+  /* Font Sizes - unchanged across themes */
+  --text-xs: 0.8rem;
+  --text-sm: 0.9rem;
+  --text-md: 0.95rem;
+  --text-lg: 1.1rem;
+  --text-xl: 1.4rem;
+}
+
+/* Latte Theme (Light) */
+.theme-latte {
+  /* Base colors */
+  --bg-primary: var(--ctp-latte-base);
+  --bg-secondary: var(--ctp-latte-mantle);
+  --border-color: var(--ctp-latte-surface0);
+  --text-primary: var(--ctp-latte-text);
+  --text-secondary: var(--ctp-latte-subtext0);
+  --text-highlight: var(--ctp-latte-subtext1);
+  --text-muted: var(--ctp-latte-overlay0);
+  
+  /* Accent Colors */
+  --accent-blue: var(--ctp-latte-blue);
+  --accent-light-blue: var(--ctp-latte-sky);
+  --accent-cyan: var(--ctp-latte-sapphire);
+  --accent-orange: var(--ctp-latte-peach);
+  --accent-green: var(--ctp-latte-green);
+  --accent-yellow: var(--ctp-latte-yellow);
+  --accent-purple: var(--ctp-latte-mauve);
+  --accent-pink: var(--ctp-latte-pink);
+  --accent-red: var(--ctp-latte-red);
+}
+
+/* Frappé Theme (Medium-Dark) */
+.theme-frappe {
+  /* Base colors */
+  --bg-primary: var(--ctp-frappe-base);
+  --bg-secondary: var(--ctp-frappe-mantle);
+  --border-color: var(--ctp-frappe-surface0);
+  --text-primary: var(--ctp-frappe-text);
+  --text-secondary: var(--ctp-frappe-subtext0);
+  --text-highlight: var(--ctp-frappe-subtext1);
+  --text-muted: var(--ctp-frappe-overlay0);
+  
+  /* Accent Colors */
+  --accent-blue: var(--ctp-frappe-blue);
+  --accent-light-blue: var(--ctp-frappe-sky);
+  --accent-cyan: var(--ctp-frappe-sapphire);
+  --accent-orange: var(--ctp-frappe-peach);
+  --accent-green: var(--ctp-frappe-green);
+  --accent-yellow: var(--ctp-frappe-yellow);
+  --accent-purple: var(--ctp-frappe-mauve);
+  --accent-pink: var(--ctp-frappe-pink);
+  --accent-red: var(--ctp-frappe-red);
+}
+
+/* Macchiato Theme (Dark) */
+.theme-macchiato {
+  /* Base colors */
+  --bg-primary: var(--ctp-macchiato-base);
+  --bg-secondary: var(--ctp-macchiato-mantle);
+  --border-color: var(--ctp-macchiato-surface0);
+  --text-primary: var(--ctp-macchiato-text);
+  --text-secondary: var(--ctp-macchiato-subtext0);
+  --text-highlight: var(--ctp-macchiato-subtext1);
+  --text-muted: var(--ctp-macchiato-overlay0);
+  
+  /* Accent Colors */
+  --accent-blue: var(--ctp-macchiato-blue);
+  --accent-light-blue: var(--ctp-macchiato-sky);
+  --accent-cyan: var(--ctp-macchiato-sapphire);
+  --accent-orange: var(--ctp-macchiato-peach);
+  --accent-green: var(--ctp-macchiato-green);
+  --accent-yellow: var(--ctp-macchiato-yellow);
+  --accent-purple: var(--ctp-macchiato-mauve);
+  --accent-pink: var(--ctp-macchiato-pink);
+  --accent-red: var(--ctp-macchiato-red);
+}
+
+/* Mocha Theme (Darkest) - explicitly defined but same as :root */
+.theme-mocha {
+  /* Base colors */
+  --bg-primary: var(--ctp-mocha-base);
+  --bg-secondary: var(--ctp-mocha-mantle);
+  --border-color: var(--ctp-mocha-surface0);
+  --text-primary: var(--ctp-mocha-text);
+  --text-secondary: var(--ctp-mocha-subtext0);
+  --text-highlight: var(--ctp-mocha-subtext1);
+  --text-muted: var(--ctp-mocha-overlay0);
+  
+  /* Accent Colors */
+  --accent-blue: var(--ctp-mocha-blue);
+  --accent-light-blue: var(--ctp-mocha-sky);
+  --accent-cyan: var(--ctp-mocha-sapphire);
+  --accent-orange: var(--ctp-mocha-peach);
+  --accent-green: var(--ctp-mocha-green);
+  --accent-yellow: var(--ctp-mocha-yellow);
+  --accent-purple: var(--ctp-mocha-mauve);
+  --accent-pink: var(--ctp-mocha-pink);
+  --accent-red: var(--ctp-mocha-red);
+}
+
+/* Theme Toggler Button Styles */
+.theme-toggle-container {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.theme-toggle-button {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  margin-left: 0.5rem;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.theme-toggle-button.active {
+  box-shadow: 0 0 0 2px var(--accent-green);
+}
+
+/* Individual theme toggle buttons */
+.theme-toggle-latte {
+  background: var(--ctp-latte-base);
+}
+
+.theme-toggle-latte::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: var(--ctp-latte-mauve);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.theme-toggle-frappe {
+  background: var(--ctp-frappe-base);
+}
+
+.theme-toggle-frappe::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: var(--ctp-frappe-sapphire);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.theme-toggle-macchiato {
+  background: var(--ctp-macchiato-base);
+}
+
+.theme-toggle-macchiato::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: var(--ctp-macchiato-pink);
+  border-radius: 50%;
+  opacity: 0.6;
+}
+
+.theme-toggle-mocha {
+  background: var(--ctp-mocha-base);
+}
+
+.theme-toggle-mocha::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 60%;
+  height: 60%;
+  transform: translate(-50%, -50%);
+  background: var(--ctp-mocha-blue);
+  border-radius: 50%;
+  opacity: 0.6;
+}
