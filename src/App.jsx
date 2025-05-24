@@ -26,8 +26,6 @@ function CounterButton({ initialCount = 0 }) {
 function App() {
   // Get data from window.portfolioData if available
   const data = typeof window !== 'undefined' ? window.portfolioData : null;
-  const personalInfo = data?.personal || { name: "Dhruv", title: "Software Developer" };
-  
   return (
     <div className="app-container">
       <header className="app-header">
@@ -39,8 +37,6 @@ function App() {
             <img src={reactLogo} className="logo react" alt="React logo" />
           </a>
         </div>
-        <h1>{personalInfo.name}'s Portfolio</h1>
-        <p className="subtitle">{personalInfo.title}</p>
       </header>
       
       <main className="app-content">
