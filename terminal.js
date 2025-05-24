@@ -1,671 +1,572 @@
 /**
- * Terminal Portfolio Implementation
- * A streamlined version with core functionality
+ * Terminal JavaScript
  */
-
-// Get portfolio data and initialize terminal
-let portfolioData;
-
-// Function to initialize the terminal with data
-function initTerminal(data) {
-    if (!data || Object.keys(data).length === 0) {
-        console.error('Portfolio data not loaded or empty.');
-        document.getElementById('content-pane').innerHTML = `
-            <div class="section-content">
-                <h1>Error: Portfolio Data Not Found</h1>
-                <div class="desc">The portfolio data could not be loaded.</div>
-            </div>
-        `;
-        return;
-    }
-    
-    // Use a shorter delay to ensure all content is fully rendered
-    // before showing any UI elements
-    setTimeout(() => {
-        document.documentElement.classList.add('content-loaded');
-    }, 50);
-    
-    // Check if we're inside an iframe
-    const isInIframe = window !== window.parent;
-    
-    // Handle the standalone toggle button visibility
-    const standaloneToggle = document.getElementById('standalone-toggle');
-    if (standaloneToggle) {
-        standaloneToggle.style.display = isInIframe ? 'none' : 'block';
-    }
-    
-    // Extract all skills from portfolio data to display in the sidebar
-    function extractAllSkillNames(skillsData) {
-        if (!skillsData) return [];
-        
-        let allSkillsWithDetails = [];
-        Object.keys(skillsData).forEach(category => {
-            if (Array.isArray(skillsData[category])) {
-                skillsData[category].forEach(skill => {
-                    allSkillsWithDetails.push({
-                        category: category,
-                        name: typeof skill === 'object' ? skill.name : skill,
-                        description: typeof skill === 'object' ? skill.description || '' : ''
-                    });
-                });
-            }
-        });
-        return allSkillsWithDetails;
-    }
-    
-    // Get all skill names to display in sidebar
-    const allSkillsWithDetails = extractAllSkillNames(data.skills);
-    
-    // Update skills list in the sidebar
-    const skillsList = document.getElementById('skills-list');
-    if (skillsList) {
-        // Keep the "All Skills" option
-        let skillsListHTML = '<li data-section="skills-all">All Skills</li>';
-        
-        // Add all individual skills below it
-        allSkillsWithDetails.forEach((skill, index) => {
-            skillsListHTML += `<li data-skill-index="${index}">${skill.name}</li>`;
-        });
-        
-        skillsList.innerHTML = skillsListHTML;
-
-        // Add event listeners to skill items
-        const skillItems = skillsList.querySelectorAll('li[data-skill-index]');
-        skillItems.forEach(item => {
-            item.addEventListener('click', function(event) {
-                event.preventDefault();
-                const skillIndex = parseInt(this.getAttribute('data-skill-index'));
-                showSkillDetails(skillIndex);
-            });
-        });
-    }
-
-    // Show details for a specific skill
-    function showSkillDetails(skillIndex) {
-        if (skillIndex < 0 || skillIndex >= allSkillsWithDetails.length) return;
-        
-        const skill = allSkillsWithDetails[skillIndex];
-        const tempSectionId = `skill-${skillIndex}`;
-        
-        // Create a temporary section for this skill
-        sections[tempSectionId] = {
-            title: `Skill: ${skill.name}`,
-            content: `
-                <div class="section-content">
-                    <h1>${skill.name}</h1>
-                    <div class="skill-category-label">Category: ${skill.category.charAt(0).toUpperCase() + skill.category.slice(1)}</div>
-                    ${skill.description ? `
-                    <div class="skill-description-section">
-                        <h2>Description</h2>
-                        <div class="desc">${skill.description}</div>
-                    </div>` : '<div class="desc">No description available for this skill.</div>'}
-                </div>
-            `
-        };
-        
-        // Update UI with animation
-        const allItems = document.querySelectorAll('.left-pane .list li');
-        allItems.forEach(item => item.classList.remove('active'));
-        
-        const skillItem = document.querySelector(`.left-pane .list li[data-skill-index="${skillIndex}"]`);
-        if (skillItem) {
-            skillItem.classList.add('active');
-            
-            // Add animation to the selected skill item
-            skillItem.classList.add('item-selected-animation');
-            setTimeout(() => {
-                skillItem.classList.remove('item-selected-animation');
-            }, 300);
-        }
-        
-        // Apply fade-out animation
-        contentPane.classList.add('content-fade-out');
-        
-        // After a short delay, update content and fade back in
-        setTimeout(() => {
-            contentPane.innerHTML = sections[tempSectionId].content;
-            document.querySelector('.terminal-bar').textContent = sections[tempSectionId].title;
-            
-            // Trigger fade-in animation
-            contentPane.classList.remove('content-fade-out');
-            contentPane.classList.add('content-fade-in');
-            
-            // Remove the animation class after completion
-            setTimeout(() => {
-                contentPane.classList.remove('content-fade-in');
-            }, 300);
-        }, 150);
-    }
-
-    // Random quote from the data
-    const randomQuote = data.quotes ? data.quotes[Math.floor(Math.random() * data.quotes.length)] : "Code is poetry.";
-    
-    // Content sections available in the terminal
-    const sections = {
-        'home': {
-            title: 'Home',
-            content: `
-                <div class="ascii-art">
-                    ██╗  ██╗███████╗██╗     ██╗      ██████╗     ██╗    ██╗ ██████╗ ██████╗ ██╗     ██████╗
-                    ██║  ██║██╔════╝██║     ██║     ██╔═══██╗    ██║    ██║██╔═══██╗██╔══██╗██║     ██╔══██╗
-                    ███████║█████╗  ██║     ██║     ██║   ██║    ██║ █╗ ██║██║   ██║██████╔╝██║     ██║  ██║
-                    ██╔══██║██╔══╝  ██║     ██║     ██║   ██║    ██║███╗██║██║   ██║██╔══██╗██║     ██║  ██║
-                    ██║  ██║███████╗███████╗███████╗╚██████╔╝     ╚███╔███╔╝╚██████╔╝██║  ██║███████╗██████╔╝
-                    ╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝      ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ 
-                </div>
-                <div class="desc">
-                    Hi, I'm <span class="keyword">${data.personal?.name || 'Dhruv'}</span> 👋<br>
-                </div>
-                <div class="desc">
-                    I'm a <span class="keyword">${data.personal?.title || 'Software Developer'}</span> based in <span class="keyword">${data.personal?.location || 'United States'}</span>.
-                </div>
-                <div class="desc">
-                    Click on a selection on the left to learn more about my work.<br>
-                    You can also <span class="keyword">navigate</span> through the sections using the <span class="highlight">arrow keys</span>.
-                </div>
-                <div class="quote">
-                    "${randomQuote}"
-                </div>
-            `
-        },
-        'proj-1': {
-            title: 'Projects',
-            content: generateProjectContent(data.projects && data.projects.length > 0 ? data.projects[0] : null)
-        },
-        'skills-all': {
-            title: 'Skills & Tools',
-            content: generateAllSkillsContent(data.skills || {})
-        },
-        'exp-1': {
-            title: 'Experience',
-            content: generateContent(data.experience && data.experience.length > 0 ? data.experience[0] : null, 'experience')
-        },
-        'exp-2': {
-            title: 'Experience',
-            content: generateContent(data.experience && data.experience.length > 1 ? data.experience[1] : null, 'experience')
-        },
-        'edu-1': {
-            title: 'Education',
-            content: generateContent(data.education && data.education.length > 0 ? data.education[0] : null, 'education')
-        }
-    };
-
-    // Generic content generator for experience and education
-    function generateContent(item, type) {
-        if (!item) {
-            return `
-                <div class="section-content">
-                    <h1>${type.charAt(0).toUpperCase() + type.slice(1)}</h1>
-                    <div class="desc">Information not available.</div>
-                </div>
-            `;
-        }
-        
-        if (type === 'experience') {
-            return `
-                <div class="section-content">
-                    <h1>${item.company || 'Company'}</h1>
-                    <div class="position">${item.position || 'Position'}</div>
-                    <div class="period">${item.period || 'Period'}</div>
-                    <div class="desc">${item.description || 'No description available.'}</div>
-                    ${item.technologies && Array.isArray(item.technologies) ? `
-                    <div class="tech-list">
-                        <span class="label">Technologies:</span>
-                        ${item.technologies.map(tech => `<span class="tech-badge">${tech}</span>`).join(' ')}
-                    </div>` : ''}
-                </div>
-            `;
-        } else {
-            return `
-                <div class="section-content">
-                    <h1>${item.institution || 'Institution'}</h1>
-                    <div class="position">${item.degree || 'Degree'}</div>
-                    <div class="period">${item.period || 'Period'}</div>
-                    ${item.description ? `<div class="desc">${item.description}</div>` : ''}
-                </div>
-            `;
-        }
-    }
-
-    // Generate project content
-    function generateProjectContent(project) {
-        if (!project) {
-            return `
-                <div class="section-content">
-                    <h1>Project</h1>
-                    <div class="desc">Project information not available.</div>
-                </div>
-            `;
-        }
-        
-        return `
-            <div class="section-content">
-                <h1>${project.name || 'Unnamed Project'}</h1>
-                <div class="desc">${project.description || 'No description available.'}</div>
-                ${project.technologies && Array.isArray(project.technologies) ? `
-                <div class="tech-list">
-                    <span class="label">Technologies:</span>
-                    ${project.technologies.map(tech => `<span class="tech-badge">${tech}</span>`).join(' ')}
-                </div>` : ''}
-                <div class="links">
-                    ${project.github ? `<a href="${project.github}" target="_blank" class="link">GitHub</a>` : ''}
-                    ${project.link ? `<a href="${project.link}" target="_blank" class="link">Live Demo</a>` : ''}
-                </div>
-            </div>
-        `;
-    }
-    
-    // Generate skills content with clickable items
-    function generateAllSkillsContent(skillsData) {
-        if (!skillsData || Object.keys(skillsData).length === 0) {
-            return `
-                <div class="section-content">
-                    <h1>Skills & Tools</h1>
-                    <div class="desc">No skills information available.</div>
-                </div>
-            `;
-        }
-        
-        // Generate HTML for skills
-        const skillsHtml = Object.keys(skillsData).map(category => {
-            const categorySkills = skillsData[category];
-            
-            if (!Array.isArray(categorySkills) || categorySkills.length === 0) {
-                return `
-                    <div class="skill-category">
-                        <h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-                        <div class="skills-list">
-                            <div class="desc">No skills found in this category.</div>
-                        </div>
-                    </div>
-                `;
-            }
-            
-            const skillsListHtml = categorySkills.map(skill => {
-                // Find the matching skill in allSkillsWithDetails to get its index
-                const skillDetailsIndex = allSkillsWithDetails.findIndex(s => 
-                    (typeof skill === 'object' && s.name === skill.name) ||
-                    (typeof skill === 'string' && s.name === skill)
-                );
-                
-                if (typeof skill === 'object' && skill.name) {
-                    return `
-                        <div class="skill-item" data-skill-index="${skillDetailsIndex !== -1 ? skillDetailsIndex : ''}" role="button" tabindex="0">
-                            <span class="skill-name">${skill.name}</span>
-                            <span class="skill-description">${skill.description || ''}</span>
-                        </div>
-                    `;
-                } else if (typeof skill === 'string') {
-                    return `
-                        <div class="skill-item" data-skill-index="${skillDetailsIndex !== -1 ? skillDetailsIndex : ''}" role="button" tabindex="0">
-                            <span class="skill-name">${skill}</span>
-                        </div>
-                    `;
-                }
-                return '';
-            }).join('');
-            
-            return `
-                <div class="skill-category">
-                    <h2>${category.charAt(0).toUpperCase() + category.slice(1)}</h2>
-                    <div class="skills-list">
-                        ${skillsListHtml}
-                    </div>
-                </div>
-            `;
-        }).join('');
-        
-        return `
-            <div class="section-content">
-                <h1>Skills & Tools</h1>
-                ${skillsHtml}
-            </div>
-        `;
-    }
-
-    // UI component references
-    const toggleButton = document.getElementById('toggle-gui');
-    const contentPane = document.getElementById('content-pane');
-    
-    // Handle toggle button click to switch between terminal and GUI views
-    function handleToggleClick(event) {
-        event.preventDefault();
-        
-        // Add visual feedback on click
-        toggleButton.classList.add('button-pressed');
-        setTimeout(() => toggleButton.classList.remove('button-pressed'), 200);
-        
-        if (window !== window.parent) {
-            // If in iframe, trigger the parent window's toggle function
-            try {
-                window.parent.toggleView(event);
-            } catch {
-                // Fallback if toggle function isn't available
-                window.parent.document.getElementById('toggle-view')?.click();
-            }
-        } else {
-            // Direct navigation if not in iframe
-            window.location.href = './';
-        }
-    }
-    
-    // Set the active section and update the UI
-    function setActiveSection(sectionId) {
-        // Remove active class from all items
-        const allItems = document.querySelectorAll('.left-pane .list li');
-        allItems.forEach(item => item.classList.remove('active'));
-        
-        // Add active class to current item
-        const activeItem = document.querySelector(`.left-pane .list li[data-section="${sectionId}"]`);
-        if (activeItem) {
-            activeItem.classList.add('active');
-            
-            // Add animation to the active item
-            activeItem.classList.add('item-selected-animation');
-            setTimeout(() => {
-                activeItem.classList.remove('item-selected-animation');
-            }, 300);
-        }
-        
-        // Update content and title with animation
-        if (sections[sectionId]) {
-            // For skills section, regenerate content every time
-            if (sectionId === 'skills-all') {
-                sections[sectionId].content = generateAllSkillsContent(data.skills || {});
-            }
-            
-            // Apply fade-out animation
-            contentPane.classList.add('content-fade-out');
-            
-            // After a short delay, update content and fade back in
-            setTimeout(() => {
-                contentPane.innerHTML = sections[sectionId].content;
-                document.querySelector('.terminal-bar').textContent = sections[sectionId].title;
-                
-                // Attach click handlers to skill items in content
-                attachSkillItemClickHandlers();
-                
-                // Trigger fade-in animation
-                contentPane.classList.remove('content-fade-out');
-                contentPane.classList.add('content-fade-in');
-                
-                // Remove the animation class after completion
-                setTimeout(() => {
-                    contentPane.classList.remove('content-fade-in');
-                }, 300);
-            }, 150);
-        } else {
-            contentPane.innerHTML = `
-                <div class="section-content">
-                    <h1>Section Not Found</h1>
-                    <div class="desc">The section "${sectionId}" was not found.</div>
-                </div>
-            `;
-        }
-    }
-    
-    // Attach click handlers to skill items in content
-    function attachSkillItemClickHandlers() {
-        const skillItems = document.querySelectorAll('.skill-item[data-skill-index]');
-        
-        skillItems.forEach(item => {
-            const skillIndex = parseInt(item.getAttribute('data-skill-index'));
-            if (isNaN(skillIndex)) return;
-            
-            item.addEventListener('click', function(event) {
-                event.preventDefault();
-                
-                // Add click animation
-                this.classList.add('item-selected-animation');
-                setTimeout(() => {
-                    this.classList.remove('item-selected-animation');
-                }, 300);
-                
-                showSkillDetails(skillIndex);
-            });
-            
-            item.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    
-                    // Add click animation
-                    this.classList.add('item-selected-animation');
-                    setTimeout(() => {
-                        this.classList.remove('item-selected-animation');
-                    }, 300);
-                    
-                    showSkillDetails(skillIndex);
-                }
-            });
-        });
-    }
-    
-    // Handle keyboard navigation
-    function handleKeyboardNavigation(event) {
-        // Arrow key navigation
-        if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
-            event.preventDefault();
-            navigateVertically(event.key);
-        }
-        
-        // Left/Right to switch between main sections
-        if (event.key === 'ArrowLeft' || event.key === 'ArrowRight') {
-            event.preventDefault();
-            navigateBetweenSections(event.key);
-        }
-        
-        // Number keys for direct section selection
-        if (['1', '2', '3', '4', '5'].includes(event.key)) {
-            event.preventDefault();
-            navigateToSectionByNumber(event.key);
-        }
-    }
-    
-    // Navigate vertically within a section list
-    function navigateVertically(direction) {
-        const activeSection = document.querySelector('.left-pane .list li.active');
-        if (activeSection) {
-            const currentList = activeSection.parentElement;
-            const items = Array.from(currentList.querySelectorAll('li'));
-            const currentIndex = items.indexOf(activeSection);
-            
-            let nextIndex;
-            if (direction === 'ArrowUp') {
-                nextIndex = (currentIndex - 1 + items.length) % items.length;
-            } else {
-                nextIndex = (currentIndex + 1) % items.length;
-            }
-            
-            // Get the next section or skill item
-            const nextItem = items[nextIndex];
-            if (nextItem) {
-                const section = nextItem.getAttribute('data-section');
-                const skillIndex = nextItem.getAttribute('data-skill-index');
-                
-                if (section) {
-                    setActiveSection(section);
-                } else if (skillIndex !== null) {
-                    // It's a skill item, show its details
-                    showSkillDetails(parseInt(skillIndex));
-                }
-                
-                // Add animation to the selected item
-                nextItem.classList.add('item-selected-animation');
-                setTimeout(() => {
-                    nextItem.classList.remove('item-selected-animation');
-                }, 300);
-            }
-        }
-    }
-    
-    // Navigate between different sections
-    function navigateBetweenSections(direction) {
-        const sections = Array.from(document.querySelectorAll('.left-pane .section'));
-        const activeSection = document.querySelector('.left-pane .list li.active');
-        
-        if (activeSection) {
-            const currentSectionEl = activeSection.closest('.section');
-            const currentSectionIndex = sections.indexOf(currentSectionEl);
-            
-            let nextSectionIndex;
-            if (direction === 'ArrowLeft') {
-                nextSectionIndex = (currentSectionIndex - 1 + sections.length) % sections.length;
-            } else {
-                nextSectionIndex = (currentSectionIndex + 1) % sections.length;
-            }
-            
-            // Add animation to the next section
-            const nextSection = sections[nextSectionIndex];
-            nextSection.classList.add('section-highlight');
-            setTimeout(() => {
-                nextSection.classList.remove('section-highlight');
-            }, 300);
-            
-            // Select the first item in the next section
-            const firstItem = nextSection.querySelector('.list li');
-            if (firstItem) {
-                const section = firstItem.getAttribute('data-section');
-                if (section) {
-                    setActiveSection(section);
-                }
-            }
-        }
-    }
-    
-    // Navigate directly to a section by number key
-    function navigateToSectionByNumber(key) {
-        const sectionIndex = parseInt(key) - 1;
-        const sections = document.querySelectorAll('.left-pane .section');
-        
-        if (sectionIndex < sections.length) {
-            const section = sections[sectionIndex];
-            
-            // Add animation to the selected section
-            section.classList.add('section-highlight');
-            setTimeout(() => {
-                section.classList.remove('section-highlight');
-            }, 300);
-            
-            const firstItem = section.querySelector('.list li');
-            
-            if (firstItem) {
-                const sectionId = firstItem.getAttribute('data-section');
-                if (sectionId) {
-                    setActiveSection(sectionId);
-                }
-            }
-        }
-    }
-    
-    // Add event listeners
-    if (toggleButton) {
-        toggleButton.addEventListener('click', handleToggleClick);
-    }
-    
-    // Add keyboard shortcut (Ctrl+Shift+T) to toggle between views
-    document.addEventListener('keydown', function(event) {
-        if (event.ctrlKey && event.shiftKey && event.key === 'T') {
-            event.preventDefault(); // Prevent default browser action
-            handleToggleClick(event);
-        }
-    });
-    
-    document.addEventListener('keydown', handleKeyboardNavigation);
-    
-    // Add click event listeners to all section items
-    const sidebarItems = document.querySelectorAll('.left-pane .list li');
-    sidebarItems.forEach(item => {
-        const section = item.getAttribute('data-section');
-        if (!section) return; // Skip if no section attribute
-        
-        // Add click listener
-        item.addEventListener('click', function(event) {
-            event.preventDefault();
-            
-            // Add click animation
-            this.classList.add('item-selected-animation');
-            setTimeout(() => {
-                this.classList.remove('item-selected-animation');
-            }, 300);
-            
-            setActiveSection(section);
-        });
-    });
-    
-    // Set up MutationObserver to watch for DOM changes and reattach handlers
-    const contentObserver = new MutationObserver(attachSkillItemClickHandlers);
-    contentObserver.observe(contentPane, { childList: true });
-    
-    // Initialize with home section
-    setActiveSection('home');
-}
-
-// Load portfolio data with error handling
 document.addEventListener('DOMContentLoaded', function() {
-    // Show loading screen and hide content initially
-    document.documentElement.classList.remove('content-loaded');
+
+    // Get references to all boxes
+    const introBox = document.querySelector('.intro-box');
+    const experienceBox = document.querySelector('.experience-box');
+    const projectsBox = document.querySelector('.project-section');
+    const skillsBox = document.querySelector('.skills-box');
+    const mainBox = document.querySelector('.main-box');
     
-    // Set a timer to ensure loading screen is shown for at least a short time
-    // to prevent flashing content
-    setTimeout(() => {
-        document.documentElement.classList.add('content-loaded');
-    }, 500);
-    
-    // Try to get portfolio data from global variable first
-    if (window.portfolioData) {
-        portfolioData = window.portfolioData;
-        initTerminal(portfolioData);
-    } else {
-        // Try to import as module
-        try {
-            import('./portfolio-data.js')
-                .then(module => {
-                    portfolioData = module.default;
-                    initTerminal(portfolioData);
-                })
-                .catch(err => {
-                    console.error('Failed to load portfolio data as module:', err);
-                    document.getElementById('content-pane').innerHTML = `
-                        <div class="section-content">
-                            <h1>Error: Portfolio Data Not Found</h1>
-                            <div class="desc">The portfolio data could not be loaded. Error: ${err.message}</div>
-                        </div>
-                    `;
+    // Function to adjust box sizes based on content and update counters
+    function adjustBoxSizes() {
+        const boxes = [experienceBox, projectsBox, skillsBox];
+        
+        boxes.forEach(box => {
+            if (!box) return;
+            
+            // Get the content element
+            const content = box.querySelector('.box-content');
+            if (!content) return;
+            
+            // Count the number of items in the box
+            const items = content.querySelectorAll('li, .experience-entry');
+            const itemCount = items.length;
+            
+            // Set a minimum height based on content
+            const minHeight = Math.max(50, Math.min(itemCount * 22, 150)); // 22px per item, min 50px, max 150px
+            
+            // Apply the calculated height with some padding
+            box.style.minHeight = `${minHeight}px`;
+            
+            // Update the footer counter
+            const footer = box.querySelector('.box-footer span');
+            if (footer && items.length > 0) {
+                const activeItem = box.querySelector('li.active, .experience-entry.active');
+                const activeIndex = activeItem ? Array.from(items).indexOf(activeItem) + 1 : 1;
+                footer.textContent = `${activeIndex} of ${itemCount}`;
+                
+                // Set padding for the counter
+                footer.style.padding = '0 8px';
+                // For right-aligned footer, no need to set width
+            }
+        });
+        
+        // Special handling for the skills box to optimize space with two columns
+        if (skillsBox) {
+            const skillItems = skillsBox.querySelectorAll('li');
+            // Always use two columns unless on very small screens
+            const boxWidth = skillsBox.offsetWidth;
+            const useColumns = boxWidth > 200; // Use columns if we have enough width
+            
+            if (useColumns) {
+                // Two columns layout - explicitly set
+                const skillsList = skillsBox.querySelector('ul.item-list');
+                if (skillsList) {
+                    skillsList.style.display = 'flex';
+                    skillsList.style.flexWrap = 'wrap';
+                    skillsList.style.gap = '4px 8px';
+                    
+                    skillItems.forEach(item => {
+                        item.style.flex = '0 0 calc(50% - 4px)';
+                        item.style.boxSizing = 'border-box';
+                    });
+                }
+            } else {
+                // Single column layout for very narrow screens
+                skillItems.forEach(item => {
+                    item.style.flex = '0 0 100%';
                 });
-        } catch (e) {
-            console.error('Error loading portfolio data:', e);
-            document.getElementById('content-pane').innerHTML = `
-                <div class="section-content">
-                    <h1>Error: Portfolio Data Not Found</h1>
-                    <div class="desc">The portfolio data could not be loaded. Check the console for details.</div>
-                </div>
-            `;
+                skillsBox.querySelector('ul.item-list').style.display = 'block';
+            }
+            
+            // Adjust the footer count to reflect the current state
+            const skillsFooter = skillsBox.querySelector('.box-footer span');
+            if (skillsFooter) {
+                skillsFooter.textContent = `1 of ${skillItems.length}`;
+            }
+        }
+        
+        // Update experience entries formatting
+        updateExperienceEntries();
+    }
+    
+    // Run the size adjustment on load
+    adjustBoxSizes();
+    
+    // Also run it when window is resized
+    window.addEventListener('resize', adjustBoxSizes);
+    
+    // Helper function to mark a box as active
+    function setActiveBox(box, viaKeyboard = false) {
+        // Remove active class from all boxes
+        document.querySelectorAll('.sidebar .box').forEach(b => {
+            b.classList.remove('active');
+            b.classList.remove('keyboard-nav'); // Remove keyboard navigation indicator
+        });
+        
+        // Add active class to the selected box
+        if (box) {
+            box.classList.add('active');
+            
+            // If navigation happened via keyboard, add the special class
+            if (viaKeyboard) {
+                box.classList.add('keyboard-nav');
+            }
+            
+            // Special handling for navigation box - don't show as active
+            if (box.classList.contains('navigation-box')) {
+                box.classList.remove('active');
+            }
         }
     }
-});
+    
+    // Helper function to select the first item in a box
+    function selectFirstItemInBox(box) {
+        if (!box) return;
+        
+        // setActiveBox(box); // Caller is responsible for setting the box active
+        
+        const firstItem = box.querySelector('.box-content li, .box-content .experience-entry');
+        if (firstItem) {
+            // Clear all active classes first
+            document.querySelectorAll('.box-content li.active, .box-content .experience-entry.active')
+                .forEach(item => item.classList.remove('active'));
+            
+            // Add active class to first item
+            firstItem.classList.add('active');
+            
+            // Update main content
+            mainBox.querySelector('.box-content').innerHTML = `
+                <h2>Selected: ${firstItem.textContent.replace(/(@.*$)/g, '')}</h2>
+                <p>Details about this selection would appear here.</p>
+            `;
+            
+            // Update footer counter
+            const footer = box.querySelector('.box-footer span');
+            const items = box.querySelectorAll('.box-content li, .box-content .experience-entry');
+            if (footer && items.length > 0) {
+                footer.textContent = `1 of ${items.length}`;
+                // Make sure the text is centered by ensuring consistent width
+                const counterWidth = `${items.length.toString().length * 2 + 4}ch`;
+                footer.style.minWidth = counterWidth;
+            }
+            
+            // Ensure the selected item is visible by scrolling to it
+            firstItem.scrollIntoView({ block: 'nearest' });
+        }
+    }
+    
+    // Add click event listeners to section items
+    const allItems = document.querySelectorAll('.box-content li, .box-content .experience-entry');
+    allItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove active class from all items
+            allItems.forEach(i => i.classList.remove('active'));
+            
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Mark the parent box as active
+            const parentBox = this.closest('.box');
+            setActiveBox(parentBox);
+            
+            // Update the main content based on the clicked item
+            let itemText = this.textContent.replace(/(@.*$)/g, '').trim();
+            
+            // Handle experience entries differently due to the new structure
+            if (this.classList.contains('experience-entry')) {
+                const jobTitle = this.querySelector(':first-child');
+                const company = this.querySelector('.highlight');
+                
+                if (jobTitle && company) {
+                    itemText = `${jobTitle.textContent.trim()} ${company.textContent.trim()}`;
+                }
+            }
+            
+            mainBox.querySelector('.box-content').innerHTML = `
+                <h2>Selected: ${itemText}</h2>
+                <p>Details about this selection would appear here.</p>
+            `;
+            
+            // Update the footer to show current selection
+            const footer = parentBox.querySelector('.box-footer span');
+            const siblings = Array.from(parentBox.querySelectorAll('li, .experience-entry'));
+            const currentIndex = siblings.indexOf(this) + 1;
+            
+            if (footer && siblings.length > 0) {
+                footer.textContent = `${currentIndex} of ${siblings.length}`;
+                // Make sure the text is centered by ensuring consistent width
+                const counterWidth = `${siblings.length.toString().length * 2 + 4}ch`;
+                footer.style.minWidth = counterWidth;
+            }
+        });
+    });
 
-// Listen for messages from parent window (when in iframe)
-window.addEventListener('message', function(event) {
-    if (event.data === 'iframe-mode') {
-        console.log('Terminal running in iframe mode');
-        // We're in iframe mode, hide standalone toggle if it exists
-        const standaloneToggle = document.getElementById('standalone-toggle');
-        if (standaloneToggle) {
-            standaloneToggle.style.display = 'none';
-        }
+    // Add click event handlers for section titles
+    const sectionTitles = document.querySelectorAll('.box-title');
+    sectionTitles.forEach(title => {
+        title.addEventListener('click', function() {
+            // Get the parent box
+            const parentBox = this.closest('.box');
+            if (parentBox) {
+                // Scroll the section into view
+                parentBox.scrollIntoView({ behavior: 'smooth' });
+                
+                // Highlight the section (false = not via keyboard)
+                setActiveBox(parentBox, false);
+                
+                // Special handling for Home section
+                if (parentBox === introBox) {
+                    showHomeContent();
+                } else {
+                    // Select the first item if it has items
+                    selectFirstItemInBox(parentBox);
+                }
+            }
+        });
+    });
+    
+    // Function to navigate between sections
+    function navigateSection(direction, viaKeyboard = true) {
+        // Define all sections in order
+        const sections = [
+            introBox,           // Home (1)
+            experienceBox,      // Experience (2)
+            projectsBox,        // Projects (3)
+            skillsBox,          // Skills (4)
+        ].filter(Boolean); // Filter out any null values and exclude navigation box
         
-        // Set up the terminal toggle button to communicate with the parent
-        const terminalToggleBtn = document.getElementById('terminal-toggle-view');
-        if (terminalToggleBtn) {
-            terminalToggleBtn.addEventListener('click', function() {
-                // Send a message to parent window to switch to GUI view
-                window.parent.postMessage('switch-to-gui', '*');
+        // Find the current active section or the most visible one
+        let activeSection = document.querySelector('.box.active');
+        
+        if (!activeSection) {
+            // Find most visible box if none is active
+            let mostVisibleBox = null;
+            let maxVisibility = 0;
+            
+            sections.forEach(section => {
+                if (!section) return;
+                
+                const rect = section.getBoundingClientRect();
+                const visibility = Math.min(
+                    Math.max(0, rect.bottom),
+                    window.innerHeight
+                ) - Math.max(0, rect.top);
+                
+                if (visibility > maxVisibility) {
+                    maxVisibility = visibility;
+                    mostVisibleBox = section;
+                }
             });
+            
+            activeSection = mostVisibleBox;
         }
         
-        // Ensure content-loaded class is applied in iframe mode
-        if (!document.documentElement.classList.contains('content-loaded')) {
-            document.documentElement.classList.add('content-loaded');
+        if (activeSection) {
+            const currentIndex = sections.indexOf(activeSection);
+            let targetIndex;
+            
+            if (direction === 'next') {
+                targetIndex = (currentIndex + 1) % sections.length;
+            } else {
+                targetIndex = (currentIndex - 1 + sections.length) % sections.length;
+            }
+            
+            // Scroll to the target section
+            sections[targetIndex].scrollIntoView({ behavior: 'smooth' });
+            
+            // Set the new section as active, and flag if via keyboard
+            setActiveBox(sections[targetIndex], viaKeyboard);
+            
+            // Select first item in the target section
+            selectFirstItemInBox(sections[targetIndex]);
+            
+            return sections[targetIndex];
         }
+        
+        return null;
+    }
+    
+    // Add keyboard navigation (1-4 to jump to sections, arrow keys to navigate)
+    document.addEventListener('keydown', function(e) {
+        // Number keys 1-4
+        if (e.key === '1') {
+            introBox.scrollIntoView({ behavior: 'smooth' });
+            
+            // For home, load the home content
+            showHomeContent();
+            
+            // Set active box
+            setActiveBox(introBox, true); // Pass true to indicate keyboard navigation
+        } else if (e.key === '2') {
+            experienceBox.scrollIntoView({ behavior: 'smooth' });
+            selectFirstItemInBox(experienceBox);
+            setActiveBox(experienceBox, true); // Pass true to indicate keyboard navigation
+        } else if (e.key === '3') {
+            projectsBox.scrollIntoView({ behavior: 'smooth' });
+            selectFirstItemInBox(projectsBox);
+            setActiveBox(projectsBox, true); // Pass true to indicate keyboard navigation
+        } else if (e.key === '4') {
+            skillsBox.scrollIntoView({ behavior: 'smooth' });
+            selectFirstItemInBox(skillsBox);
+            setActiveBox(skillsBox, true); // Pass true to indicate keyboard navigation
+        }
+        
+        // Arrow keys for navigation
+        if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+            // Use the navigateSection function for left/right navigation
+            const direction = e.key === 'ArrowRight' ? 'next' : 'prev';
+            navigateSection(direction, true); // Pass true to indicate keyboard navigation
+        }
+        
+        // Vim navigation keys (h, j, k, l)
+        if (e.key === 'h') {
+            // Navigate left
+            navigateSection('prev', true); // Pass true to indicate keyboard navigation
+        } else if (e.key === 'l') {
+            // Navigate right
+            navigateSection('next', true); // Pass true to indicate keyboard navigation
+        }
+        
+        // Up/down arrows for item selection within a section
+        if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+            // Find the active item or the first item in the most visible box
+            const activeItem = document.querySelector('.box-content li.active, .box-content .experience-entry.active');
+            
+            // If there's an active item, navigate within its section
+            if (activeItem) {
+                // Get all siblings
+                const parentBox = activeItem.closest('.box');
+                const allItems = Array.from(parentBox.querySelectorAll('li, .experience-entry'));
+                const currentIndex = allItems.indexOf(activeItem);
+                let targetIndex;
+                
+                if (e.key === 'ArrowDown') {
+                    targetIndex = (currentIndex + 1) % allItems.length;
+                } else {
+                    targetIndex = (currentIndex - 1 + allItems.length) % allItems.length;
+                }
+                
+                // Simulate a click on the target item
+                allItems[targetIndex].click();
+                allItems[targetIndex].scrollIntoView({ block: 'nearest' });
+            } else {
+                // If no active item, find the most visible box and select first item
+                const sections = [introBox, experienceBox, projectsBox, skillsBox];
+                let mostVisibleBox = null;
+                let maxVisibility = 0;
+                
+                sections.forEach(section => {
+                    if (!section) return;
+                    
+                    const rect = section.getBoundingClientRect();
+                    const visibility = Math.min(
+                        Math.max(0, rect.bottom),
+                        window.innerHeight
+                    ) - Math.max(0, rect.top);
+                    
+                    if (visibility > maxVisibility) {
+                        maxVisibility = visibility;
+                        mostVisibleBox = section;
+                    }
+                });
+                
+                if (mostVisibleBox) {
+                    selectFirstItemInBox(mostVisibleBox);
+                }
+            }
+        }
+        
+        // Helper to show a temporary keyboard shortcut tooltip
+        function showKeyboardTip(key, action) {
+            // Create a tooltip element if it doesn't exist
+            let tooltip = document.getElementById('keyboard-tooltip');
+            if (!tooltip) {
+                tooltip = document.createElement('div');
+                tooltip.id = 'keyboard-tooltip';
+                document.body.appendChild(tooltip);
+            }
+            
+            // Set the content and show the tooltip
+            tooltip.innerHTML = `<span class="key">${key}</span>: ${action}`;
+            tooltip.classList.add('active');
+            
+            // Position near the bottom of the screen
+            tooltip.style.bottom = '100px';
+            tooltip.style.left = '50%';
+            tooltip.style.transform = 'translateX(-50%)';
+            
+            // Hide after 2 seconds
+            setTimeout(() => {
+                tooltip.classList.remove('active');
+            }, 2000);
+        }
+
+        // Track when the user first uses keyboard navigation
+        let hasShownKeyboardTips = false;
+
+        // Show keyboard tips the first time keyboard is used for navigation
+        if (!hasShownKeyboardTips && 
+            (e.key === 'ArrowLeft' || e.key === 'ArrowRight' || 
+             e.key === 'h' || e.key === 'l' || 
+             (e.key >= '1' && e.key <= '4'))) {
+            
+            hasShownKeyboardTips = true;
+            showKeyboardTip('↑↓←→', 'Navigate sections & items');
+        }
+        
+        // For other keys, continue with the existing implementation...
+        // The code below is already implemented and works fine
+    });
+    
+    // Special handling for the experience box to format entries correctly
+    function updateExperienceEntries() {
+        const experienceEntries = document.querySelectorAll('.experience-entry');
+        
+        experienceEntries.forEach(entry => {
+            const jobTitle = entry.querySelector(':first-child');
+            const company = entry.querySelector('.highlight');
+            
+            if (jobTitle && company) {
+                // Calculate available width
+                const boxWidth = entry.closest('.box').offsetWidth;
+                
+                // Always ensure consistent spacing
+                company.style.marginTop = '3px';
+                
+                // Set max width to prevent overflow
+                jobTitle.style.maxWidth = (boxWidth - 20) + 'px';
+                company.style.maxWidth = (boxWidth - 25) + 'px';
+            }
+        });
+    }
+    
+    // Initial call to format experience entries
+    updateExperienceEntries();
+    
+    // Update experience entries on window resize to handle layout changes
+    window.addEventListener('resize', updateExperienceEntries);
+    
+    // Function to generate and insert ASCII art
+    function generateASCIIArt() {
+        // Cleaner way to insert ASCII art using JavaScript
+        const asciiArt = `
+██╗  ██╗███████╗██╗     ██╗      ██████╗     ██╗    ██╗ ██████╗ ██████╗ ██╗     ██████╗ 
+██║  ██║██╔════╝██║     ██║     ██╔═══██╗    ██║    ██║██╔═══██╗██╔══██╗██║     ██╔══██╗
+███████║█████╗  ██║     ██║     ██║   ██║    ██║ █╗ ██║██║   ██║██████╔╝██║     ██║  ██║
+██╔══██║██╔══╝  ██║     ██║     ██║   ██║    ██║███╗██║██║   ██║██╔══██╗██║     ██║  ██║
+██║  ██║███████╗███████╗███████╗╚██████╔╝    ╚███╔███╔╝╚██████╔╝██║  ██║███████╗██████╔╝
+╚═╝  ╚═╝╚══════╝╚══════╝╚══════╝ ╚═════╝      ╚══╝╚══╝  ╚═════╝ ╚═╝  ╚═╝╚══════╝╚═════╝ 
+`;
+        
+        const asciiArtElement = document.querySelector('.ascii-art');
+        if (asciiArtElement) {
+            asciiArtElement.textContent = asciiArt;
+        }
+    }
+
+    // Generate ASCII art
+    generateASCIIArt();
+    
+    // Make the Home section content clickable to navigate there
+    if (introBox) {
+        introBox.querySelector('.box-content').addEventListener('click', function() {
+            // Highlight the Home section
+            setActiveBox(introBox);
+            
+            // Show home content
+            showHomeContent();
+            
+            // Scroll the intro box into view
+            introBox.scrollIntoView({ behavior: 'smooth' });
+        });
+        
+        // Also make the Home title clickable
+        introBox.querySelector('.box-title').addEventListener('click', function() {
+            // Highlight the Home section
+            setActiveBox(introBox);
+            
+            // Show home content
+            showHomeContent();
+            
+            // Scroll the intro box into view
+            introBox.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+    
+    // Function to show home content
+    function showHomeContent() {
+        // Reset active items in all sections
+        document.querySelectorAll('.box-content li.active, .box-content .experience-entry.active')
+            .forEach(item => item.classList.remove('active'));
+        
+        // Generate ASCII art
+        generateASCIIArt();
+        
+        // Reset main content to default
+        const mainContent = mainBox.querySelector('.box-content');
+        if (mainContent) {
+            // Show the default main content with ASCII art, intro text, etc.
+            mainContent.innerHTML = `
+                <pre class="ascii-art">
+                    <!-- ASCII art will be inserted by JavaScript -->
+                </pre>
+                <p>Hi, I'm <span class="secondary-highlight">Dhruv</span> 👋</p>
+                <p>A <span class="highlight">passionate software developer</span></p>
+
+                <p>I'm always looking for opportunities to learn and grow as a developer.</p>
+
+                <p>You can find me on <a href="#" class="highlight">LinkedIn</a>.</p>
+                <p>Check out my projects on <a href="#" class="highlight">GitHub</a> or view my <a href="#" class="highlight">Portfolio</a>.</p>
+                <p>You can find my resume <a href="#" class="highlight">here</a>.</p>
+
+                <p>Click on a section on the left to learn more about my projects and skills.</p>
+                <p>You can navigate through the sections using the <span class="secondary-highlight">arrow keys</span> or <span class="highlight">by clicking</span> on the items in each section.</p>
+
+                <div class="quote-box">
+                    <p>There are 10 types of people in this world: those who understand binary and those who don't.</p>
+                    <div class="quote-reference">Programming Humor</div>
+                </div>
+            `;
+            
+            // Re-insert ASCII art since the innerHTML change removed it
+            generateASCIIArt();
+        }
+    }
+    
+    // Add scroll-based active section detection
+    document.querySelector('.sidebar').addEventListener('scroll', debounce(function() {
+        // Find all section boxes (excludes navigation box from active detection)
+        const sections = [introBox, experienceBox, projectsBox, skillsBox].filter(Boolean);
+        
+        // Find the box that's most in view
+        let mostVisibleBox = null;
+        let maxVisibility = 0;
+        
+        sections.forEach(section => {
+            if (!section) return;
+            
+            const rect = section.getBoundingClientRect();
+            const visibility = Math.min(
+                Math.max(0, rect.bottom),
+                window.innerHeight
+            ) - Math.max(0, rect.top);
+            
+            if (visibility > maxVisibility) {
+                maxVisibility = visibility;
+                mostVisibleBox = section;
+            }
+        });
+        
+        // Set the most visible box as active
+        if (mostVisibleBox) {
+            setActiveBox(mostVisibleBox);
+        }
+    }, 100)); // Debounce for better performance
+    
+    // Debounce function to limit how often a function is called
+    function debounce(func, wait) {
+        let timeout;
+        return function() {
+            const context = this;
+            const args = arguments;
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                func.apply(context, args);
+            }, wait);
+        };
     }
 });

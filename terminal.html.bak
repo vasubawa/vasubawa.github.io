@@ -2,113 +2,265 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Terminal Portfolio</title>
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta name="description" content="Terminal-style UI with box layout" />
+		<meta name="theme-color" content="#0a0a0a" />
+		<title>Terminal</title>
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
 			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
 			rel="stylesheet" />
-		<style>
-			/* Hide toggle buttons and terminal bar initially until fully loaded */
-			.view-toggle-corner,
-			.toggle-button.terminal-mode,
-			.terminal-bar {
-				opacity: 0;
-				transition: opacity 0.3s ease;
-			}
-
-			/* Show content when loaded */
-			html.content-loaded .view-toggle-corner,
-			html.content-loaded .toggle-button.terminal-mode,
-			html.content-loaded .terminal-bar {
-				opacity: 1;
-			}
-		</style>
-		<script>
-			// Mark page as loaded only after all content is ready
-			window.addEventListener("load", function () {
-				document.documentElement.classList.add("content-loaded");
-			});
-		</script>
-		<script type="module" crossorigin src="/assets/terminal-ByX8WDME.js"></script>
-		<link rel="modulepreload" crossorigin href="/assets/portfolio-data-C48hvdeD.js">
-		<link rel="stylesheet" crossorigin href="/assets/terminal-B3GibZk5.css">
+		<script type="module" crossorigin src="/assets/terminal-CeE22HLG.js"></script>
+		<link rel="modulepreload" crossorigin href="/assets/modulepreload-polyfill-B5Qt9EMX.js">
+		<link rel="stylesheet" crossorigin href="/assets/terminal-DObENCBw.css">
 	</head>
 	<body>
-		<!-- Loading spinner for terminal view -->
-		<div id="terminal-loading" class="terminal-loading">
-			<div class="terminal-loading-spinner"></div>
-		</div>
-
-		<!-- Load portfolio data first (as module if supported, else as regular script) -->
-
-		<!-- Toggle Button for direct access -->
-		<div id="standalone-toggle" class="view-toggle-corner">
-			<a href="/" class="toggle-button terminal-mode">
-				<span class="toggle-icon">&#9001;</span>
-				<span class="toggle-text">GUI View</span>
-			</a>
-		</div>
-
-		<div class="split-pane">
-			<aside class="left-pane">
-				<div class="section" id="intro-section">
-					<div class="section-title">Home</div>
-					<ul class="list" id="home-list">
-						<li class="active" data-section="home">
-							Hello! I'm Dhruv! a passionate software dev. :)
-						</li>
-					</ul>
-				</div>
-				<div class="section" id="projects-section">
-					<div class="section-title">Projects</div>
-					<ul class="list" id="proj-list">
-						<li data-section="proj-1">Portfolio Website</li>
-					</ul>
-					<div class="list-footer" id="proj-footer"></div>
-				</div>
-				<div class="section" id="experience-section">
-					<div class="section-title">Experience</div>
-					<ul class="list" id="exp-list">
-						<li data-section="exp-1">Tech Company</li>
-						<li data-section="exp-2">Previous Company</li>
-					</ul>
-					<div class="list-footer" id="exp-footer"></div>
-				</div>
-				<div class="section" id="education-section">
-					<div class="section-title">Education</div>
-					<ul class="list" id="edu-list">
-						<li data-section="edu-1">University Name</li>
-					</ul>
-					<div class="list-footer" id="edu-footer"></div>
-				</div>
-				<div class="section" id="skills-section">
-					<div class="section-title">Skills • Tools</div>
-					<ul class="list" id="skills-list">
-						<li data-section="skills-all">All Skills</li>
-					</ul>
-					<div class="list-footer" id="skills-footer"></div>
-				</div>
-				<div class="keyboard-hints">
-					<span>&lt;1-5&gt;</span>: Jump to section,<br />
-					<span>&lt;left&gt;/&lt;right&gt;</span>: Switch section,<br />
-					<span>&lt;up&gt;/&lt;down&gt;</span>: Switch item (or just
-					use the mouse)<br />
-				</div>
-			</aside>
-			<div class="right-container">
-				<div class="terminal-bar">
-					<span class="terminal-title">Home</span>
-					<button
-						id="terminal-toggle-view"
-						class="toggle-button terminal-mode">
-						<span class="toggle-icon">&#9001;</span>
-						<span class="toggle-text">GUI View</span>
-					</button>
-				</div>
-				<main class="right-pane" id="content-pane"></main>
+		<!-- Navigation bar at the bottom -->
+		<div class="nav-bar">
+			<div class="nav-links">
+				<a href="#" id="resume">Resume</a>
+				<a href="#" id="github">GitHub</a>
+				<a href="#" id="linkedin">LinkedIn</a>
 			</div>
 		</div>
+
+		<!-- Corner links - positioned at bottom right -->
+		<div class="corner-links">
+			<a href="#" id="corner-resume">Resume</a>
+			<a href="#" id="corner-github">GitHub</a>
+			<a href="#" id="corner-linkedin">LinkedIn</a>
+		</div>
+		<div class="terminal-layout">
+			<!-- Left sidebar with sections -->
+			<div class="sidebar">
+				<!-- Home section - always visible at top -->
+				<div class="box intro-box">
+					<div class="box-header">
+						<div class="box-title">Home</div>
+					</div>
+					<div class="box-content">Hello! :)</div>
+				</div>
+
+				<!-- Scrollable middle content -->
+				<div class="sidebar-middle-content">
+					<!-- Experience section -->
+					<div class="box experience-box">
+						<div class="box-header">
+							<div class="box-title">Experience</div>
+						</div>
+						<div class="box-content scroll-content">
+							<div class="experience-entry">
+								<div>Frontend Developer</div>
+								<div class="highlight">@ Tech Company</div>
+							</div>
+							<div class="experience-entry">
+								<div>Web Developer</div>
+								<div class="highlight">@ Figma</div>
+							</div>
+							<div class="experience-entry">
+								<div>Backend Developer</div>
+								<div class="highlight">@ Backend Studio</div>
+							</div>
+							<div class="experience-entry">
+								<div>JavaScript Engineer</div>
+								<div class="highlight">@ Startup</div>
+							</div>
+							<div class="experience-entry">
+								<div>Open Source Contributor</div>
+								<div class="highlight">@ GitHub</div>
+							</div>
+						</div>
+						<div class="box-footer">
+							<span>1 of 5</span>
+						</div>
+					</div>
+
+					<!-- Projects section -->
+					<div class="box projects-box project-section">
+						<div class="box-header">
+							<div class="box-title">Projects</div>
+						</div>
+						<div class="box-content scroll-content">
+							<ul class="item-list">
+								<li>
+									<span class="project-marker">■</span>
+									Portfolio Website
+								</li>
+								<li>
+									<span class="project-marker">■</span>
+									E-commerce Platform
+								</li>
+								<li>
+									<span class="project-marker">■</span> Task
+									Management App
+								</li>
+								<li>
+									<span class="project-marker">■</span>
+									Weather Dashboard
+								</li>
+								<li>
+									<span class="project-marker">■</span> Social
+									Media Clone
+								</li>
+								<li>
+									<span class="project-marker">■</span> Blog
+								</li>
+							</ul>
+						</div>
+						<div class="box-footer">
+							<span>1 of 7</span>
+						</div>
+					</div>
+
+					<!-- Skills section -->
+					<div class="box skills-box">
+						<div class="box-header">
+							<div class="box-title">Skills - Tools</div>
+						</div>
+						<div class="box-content scroll-content">
+							<ul class="item-list">
+								<li>
+									<span class="skill-marker">■</span> HTML
+								</li>
+								<li><span class="skill-marker">■</span> CSS</li>
+								<li>
+									<span class="skill-marker">■</span>
+									JavaScript
+								</li>
+								<li>
+									<span class="skill-marker">■</span>
+									TypeScript
+								</li>
+								<li>
+									<span class="skill-marker">■</span> React
+								</li>
+								<li>
+									<span class="skill-marker">■</span> Node.js
+								</li>
+								<li>
+									<span class="skill-marker">■</span> Express
+								</li>
+								<li>
+									<span class="skill-marker">■</span> MongoDB
+								</li>
+								<li><span class="skill-marker">■</span> SQL</li>
+								<li><span class="skill-marker">■</span> Git</li>
+
+								<li>
+									<span class="skill-marker">■</span> Tailwind
+									CSS
+								</li>
+
+								<li>
+									<span class="skill-marker">■</span> Docker
+								</li>
+							</ul>
+						</div>
+						<div class="box-footer">
+							<span>1 of 12</span>
+						</div>
+					</div>
+				</div>
+				<!-- End of sidebar-middle-content -->
+
+				<!-- Navigation section - always visible at bottom -->
+				<div class="box navigation-box">
+					<div class="box-header">
+						<div class="box-title">Navigation</div>
+					</div>
+					<div class="box-content">
+						<div class="keyboard-hints">
+							<div class="keyboard-hint">
+								<span class="key">1-4</span>: Jump to section
+							</div>
+							<div class="keyboard-hint">
+								<span class="key">h/l</span>: Navigate
+								left/right
+							</div>
+							<div class="keyboard-hint">
+								<span class="key">j/k</span>: Navigate up/down
+							</div>
+							<div class="keyboard-hint">
+								<span class="key">←/→</span>: Navigate between
+								sections
+							</div>
+							<div class="keyboard-hint">
+								<span class="key">↑/↓</span>: Navigate within
+								section
+							</div>
+							<div class="keyboard-hint">
+								<span class="key">Enter</span>: Select item
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Main content area -->
+			<div class="main-content">
+				<div class="box main-box">
+					<div class="box-header">
+						<div class="box-title">Terminal</div>
+					</div>
+					<div class="box-content main-content-area">
+						<pre class="ascii-art">
+							<!-- ASCII art will be inserted by JavaScript -->
+						</pre>
+						<p>
+							Hi, I'm
+							<span class="secondary-highlight">Dhruv</span> 👋
+						</p>
+						<p>
+							A
+							<span class="highlight"
+								>passionate software developer</span
+							>
+						</p>
+
+						<p>
+							I'm always looking for opportunities to learn and
+							grow as a developer.
+						</p>
+
+						<p>
+							You can find me on
+							<a href="#" class="highlight">LinkedIn</a>.
+						</p>
+						<p>
+							Check out my projects on
+							<a href="#" class="highlight">GitHub</a> or view my
+							<a href="#" class="highlight">Portfolio</a>.
+						</p>
+						<p>
+							You can find my resume
+							<a href="#" class="highlight">here</a>.
+						</p>
+
+						<p>
+							Click on a section on the left to learn more about
+							my projects and skills.
+						</p>
+						<p>
+							You can navigate through the sections using the
+							<span class="secondary-highlight">arrow keys</span>
+							or <span class="highlight">by clicking</span> on the
+							items in each section.
+						</p>
+
+						<div class="quote-box">
+							<p>
+								There are 10 types of people in this world:
+								those who understand binary and those who don't.
+							</p>
+							<div class="quote-reference">Programming Humor</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
 	</body>
 </html>
