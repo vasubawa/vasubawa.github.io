@@ -1,4 +1,4 @@
-/* Terminal Box Layout - Inspired by the image */
+/* Terminal Box Layout - Main styling for terminal portfolio */
 :root {
   --border-color: #333;
   --header-bg: #111;
@@ -26,67 +26,52 @@ body {
 .terminal-layout {
   display: flex;
   width: 100%;
-  height: calc(100vh - 28px); /* Height minus nav bar */
-  flex-wrap: wrap; /* Allow wrapping for better responsiveness */
-  overflow: hidden; /* Prevent overall overflow */
+  height: calc(100vh - 28px);
+  flex-wrap: wrap;
+  overflow: hidden;
   position: relative;
-  z-index: 0; /* Base z-index */
+  z-index: 0;
 }
 
 .sidebar {
-  width: 320px; /* Slightly reduced from 350px */
-  min-width: 250px; /* Minimum width for readability */
-  max-width: 100%; /* Allow full width on small screens */
-  flex: 1 0 auto; /* Allow growing but prevent shrinking too much */
-  border-right: 1px solid var(--border-color);
+  width: 320px;
+  min-width: 250px;
+  max-width: 100%; 
+  flex: 1 0 auto;
   display: flex;
   flex-direction: column;
-  position: relative; /* Ensure proper stacking context */
-  z-index: 2; /* Higher z-index to position over main content border */
-  overflow: hidden; /* Don't scroll the entire sidebar */
-  background-color: var(--box-bg);
-  height: 100%; /* Full height */
-}
-
-/* Fix for extra lines appearing in sidebar */
-.sidebar-middle-content .box {
-  border: 1px solid var(--border-color);
-  background-color: var(--box-bg);
-  box-sizing: border-box;
-  /* Force each box to only show its own borders */
   position: relative;
-  z-index: 1;
-  margin-top: 8px;
-  margin-bottom: 8px;
-  /* Ensure clean borders between boxes */
-  overflow: visible;
+  z-index: 2;
+  overflow: hidden;
+  background-color: var(--box-bg);
+  height: 100%;
+  padding: 10px;
+  box-sizing: border-box;
+  border-right: 1px solid var(--border-color);
 }
 
 .sidebar-middle-content {
   flex: 1;
-  overflow-y: hidden; /* Changed from auto - each section will scroll independently */
-  overflow-x: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* Distribute space between sections */
-  gap: 0; /* Remove any gap between boxes */
-  padding: 0 8px; /* Add padding on the sides */
+  overflow: hidden;
+  margin: 10px 0;
 }
 
 .main-content {
-  flex: 999 1 500px; /* Higher growth factor, allow some shrinking, min width */
+  flex: 999 1 500px;
   display: flex;
   flex-direction: column;
-  overflow-y: auto; /* Allow vertical scrolling */
-  overflow-x: hidden; /* Prevent horizontal scrolling */
-  position: relative; /* Ensure proper stacking context */
-  margin-left: -1px; /* Fix the double border between sidebar and main content */
-  z-index: 1; /* Lower z-index than sidebar to ensure proper overlap */
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  margin-left: -1px;
+  z-index: 1;
 }
 
 /* Box styling with continuous borders */
 .box {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -94,9 +79,9 @@ body {
   border: 1px solid var(--border-color);
   border-radius: 0;
   overflow: visible;
-  box-sizing: border-box; /* Ensure padding doesn't affect dimensions */
-  /* Ensure seamless borders */
-  isolation: isolate; /* Create a new stacking context */
+  box-sizing: border-box;
+  isolation: isolate;
+  padding-top: 0;
 }
 
 .box-header, .box-footer {
@@ -111,91 +96,77 @@ body {
 
 .box-header {
   padding: 0;
-  justify-content: flex-start; /* Align to the left */
-  margin-top: -10px; /* Pull up to overlap the top border */
+  justify-content: flex-start;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 24px; /* Increased height for better visibility */
-  line-height: 1; /* Ensure text aligns properly */
-  overflow: visible; /* Prevent text from being cut off */
-  z-index: 3; /* Higher z-index to ensure visibility */
+  width: auto;
+  height: 24px;
+  line-height: 1;
+  overflow: visible;
+  z-index: 5; 
+  transform: translateY(-50%);
 }
 
 .box-title {
   background-color: var(--box-bg);
   font-weight: bold;
-  padding: 0 12px; /* Increased horizontal padding */
-  margin-left: 0; /* Position at the left */
+  padding: 0 12px;
+  margin-left: 0;
   text-transform: uppercase;
   letter-spacing: 1px;
   font-size: 12px;
   position: relative;
-  z-index: 3; /* Higher z-index to ensure it's above the line */
+  z-index: 3;
   display: flex;
   align-items: center;
-  height: 24px; /* Match height increase */
-  line-height: 24px; /* Match height for proper vertical centering */
-  overflow: visible; /* Ensure text isn't cut off */
-  white-space: nowrap; /* Prevent text wrapping */
-  border-right: 1px solid var(--border-color); /* Add right border */
-  border-bottom: 1px solid var(--border-color); /* Add bottom border */
-  border-bottom-right-radius: 3px; /* Rounded corner */
-  transition: all 0.2s ease; /* Add transition for hover effect */
-  color: var(--text-color); /* Set default color */
-}
-
-/* Title line that shows through the text */
-.box-title::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: auto; /* Don't extend left */
-  right: -500px; /* Extend far to the right */
-  height: 1px;
-  width: 500px; /* Make line long enough */
-  background-color: var(--border-color);
-  z-index: -1;
+  height: 24px;
+  line-height: 24px;
+  overflow: visible;
+  white-space: nowrap;
+  border-right: 1px solid var(--border-color);
+  border-bottom: 1px solid var(--border-color);
+  border-bottom-right-radius: 3px;
+  transition: all 0.2s ease;
+  color: var(--highlight-color);
+  box-sizing: border-box;
 }
 
 .box-content {
-  padding: 8px 10px; /* Reduced vertical padding */
-  margin-top: 12px; /* Increased from 10px to allow more space for header */
-  overflow-y: auto; /* Each box content can scroll */
+  padding: 8px 10px;
+  margin-top: 12px;
+  overflow-y: auto;
   flex: 1;
   z-index: 1;
   position: relative;
-  min-height: 20px; /* Reduced minimum height */
-  box-sizing: border-box; /* Ensure consistent sizing */
-  margin-bottom: 10px; /* Ensure space for footer */
+  min-height: 20px;
+  box-sizing: border-box;
+  margin-bottom: 8px;
 }
 
-/* Match main box with side boxes */
 .main-content .box-content {
-  margin-top: 15px; /* Space for title */
+  margin-top: 20px;
   padding: 0 15px;
 }
 
-/* Special handling for content in mid-section boxes */
 .sidebar-middle-content .box-content {
-  max-height: none; /* Remove fixed max-height */
-  overflow-y: auto; /* Enable scrolling for content that exceeds max-height */
+  max-height: none;
+  overflow-y: auto;
 }
 
 .box-footer {
   padding: 0;
-  justify-content: flex-end; /* Align to the right side */
-  margin-bottom: -1px; /* Pull down to overlap the bottom border exactly */
+  justify-content: flex-end;
   position: absolute;
   bottom: 0;
-  right: 0; /* Position at right rather than left */
-  width: auto; /* Only as wide as needed */
-  height: 24px; /* Keep consistent height */
+  right: 0;
+  width: auto;
+  height: 24px;
   display: flex;
   align-items: center;
   overflow: visible;
   z-index: 3;
+  transform: translateY(50%);
 }
 
 .box-footer span {
@@ -210,68 +181,62 @@ body {
   transition: all 0.2s ease;
 }
 
-/* Add hover effect to the count and title */
+/* Hover effects for boxes */
 .box:hover .box-footer span {
   opacity: 1;
   color: var(--highlight-color);
   border-color: var(--highlight-color);
 }
 
-/* Add highlight effect to the section title on hover */
 .box:hover .box-title {
   color: var(--highlight-color);
   border-color: var(--highlight-color);
 }
 
-/* Make title line highlight on hover too */
 .box:hover .box-title::before {
   background-color: var(--highlight-color);
   opacity: 0.4;
 }
 
-/* Hide footer lines completely */
-.box-footer::before, .box-footer::after {
-  display: none;
-}
-
 /* Specific boxes */
 .intro-box, .experience-box, .projects-box, .skills-box, .navigation-box {
   flex: 0 0 auto;
-  margin-bottom: 10px; /* Reduced gap between boxes for more consistency */
-  padding-top: 10px; /* Keep padding */
-  padding-bottom: 10px; /* Keep padding */
+  margin-bottom: 15px;
+  padding-top: 0;
+  padding-bottom: 8px;
   position: relative;
-  border-radius: 0; /* Ensure clean edges */
-  z-index: 1; /* Ensure proper stacking */
+  border-radius: 0;
+  z-index: 1;
 }
 
 .intro-box {
-  min-height: 50px !important; /* Increased minimum height */
-  margin-top: 10px !important; /* Increased margin */
-  margin-bottom: 16px !important; /* Increased margin */
-  padding: 10px 12px 8px 12px !important; /* Adjusted padding */
-  border-color: var(--border-color); /* Ensure consistent border */
+  min-height: 50px !important;
+  margin-top: 10px !important;
+  margin-bottom: 15px !important;
+  padding: 0 12px 8px 12px !important;
+  border-color: var(--border-color);
 }
 
-.sidebar-middle-content .projects-box, .sidebar-middle-content .experience-box {
-  flex: 1 1 auto; /* Standard flex ratio */
-  min-height: 50px; /* Minimum height */
+.sidebar-middle-content .projects-box, 
+.sidebar-middle-content .experience-box {
+  flex: 1 1 auto;
+  min-height: 50px;
 }
 
 .sidebar-middle-content .skills-box {
-  flex: 3 1 auto; /* Increased flex-grow from 2 to 3 to give more space to Skills box */
-  min-height: 40px; /* Minimum height */
-  max-height: none; /* Remove fixed max height */
-  margin-bottom: 10px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease; /* Smooth transitions */
-  flex-basis: 0; /* Equal starting point for all sections */
+  flex: 3 1 auto;
+  min-height: 40px;
+  max-height: none;
+  margin-bottom: 15px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  flex-basis: 0;
 }
 
 .navigation-box {
-  min-height: 50px !important; /* Increased minimum height */
-  margin-bottom: 10px !important; /* Increased margin */
-  padding: 10px 12px 8px 12px !important; /* Adjusted padding */
-  border-color: var(--border-color); /* Ensure consistent border */
+  min-height: 50px !important;
+  margin-bottom: 10px !important;
+  padding: 0 12px 8px 12px !important;
+  border-color: var(--border-color);
 }
 
 .main-box {
@@ -286,8 +251,8 @@ body {
 
 .main-content-area {
   line-height: 1.6;
-  padding: 15px 15px 5px 15px; /* Consistent padding */
-  overflow-y: auto; /* Enable scrolling */
+  padding: 15px 15px 5px 15px;
+  overflow-y: auto;
   max-height: calc(100vh - 80px);
 }
 
@@ -300,9 +265,9 @@ body {
   color: var(--secondary-highlight);
 }
 
-/* Experience entries styling with better handling for long company names */
+/* Experience entries styling */
 .experience-entry {
-  margin-bottom: 8px; /* Increased margin for better separation */
+  margin-bottom: 8px;
   display: flex;
   flex-direction: column;
   margin-left: 6px;
@@ -311,17 +276,17 @@ body {
   border-radius: 3px;
   transition: background-color 0.15s ease;
   position: relative;
-  width: calc(100% - 15px); /* Ensure proper width */
+  width: calc(100% - 15px);
   box-sizing: border-box;
-  overflow: visible; /* Ensure no content is cut off */
+  overflow: visible;
 }
 
 .experience-entry > div:first-child {
   font-weight: 500;
-  white-space: nowrap; /* Prevent wrapping */
-  text-overflow: ellipsis; /* Show ellipsis if needed */
-  overflow: hidden; /* Hide overflow */
-  max-width: 100%; /* Ensure it doesn't stretch the container */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
 }
 
 .experience-entry .highlight {
@@ -330,32 +295,30 @@ body {
   color: var(--highlight-color);
   font-size: 0.95em;
   opacity: 0.9;
-  white-space: nowrap; /* Prevent wrapping */
-  text-overflow: ellipsis; /* Show ellipsis if needed */
-  overflow: hidden; /* Hide overflow */
-  max-width: 100%; /* Ensure it fits */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 100%;
 }
 
-/* Enhanced spacing for experience section */
 .sidebar-middle-content .experience-box .scroll-content {
-  max-height: calc(30vh); /* Give more space to experience section */
-  padding-bottom: 10px; /* Add padding to prevent content touching footer */
+  max-height: calc(30vh);
+  padding-bottom: 10px;
 }
 
-/* List styling - make lists continuous for Projects and Experience sections */
+/* List styling */
 ul.item-list {
   list-style-type: none;
   padding: 0;
-  margin: 0 10px; /* Add margin for list */
-  display: block; /* Change from flex to block for continuous lists */
+  margin: 0 10px;
+  display: block;
 }
 
-/* Two column layout specifically for Skills/Tools section */
 .skills-box ul.item-list {
-  display: flex !important; /* Force flex display for skills */
-  flex-wrap: wrap; /* Allow wrapping to multiple rows */
-  justify-content: space-between; /* Space items evenly */
-  gap: 2px 6px; /* Tight row gap 2px, column gap 6px */
+  display: flex !important;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2px 6px;
 }
 
 ul.item-list li {
@@ -368,7 +331,6 @@ ul.item-list li {
   position: relative;
 }
 
-/* Style for project markers */
 .project-marker {
   color: var(--secondary-highlight);
   margin-right: 8px;
@@ -379,7 +341,6 @@ ul.item-list li {
   font-weight: normal;
 }
 
-/* Style for skill markers */
 .skill-marker {
   color: var(--secondary-highlight);
   margin-right: 8px;
@@ -389,42 +350,40 @@ ul.item-list li {
   text-align: center;
 }
 
-/* Specific styling for skills in the two-column layout */
 .skills-box ul.item-list li {
-  flex: 0 0 calc(50% - 3px); /* Each skill takes roughly half the width minus gap */
+  flex: 0 0 calc(50% - 3px);
   box-sizing: border-box;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   margin-bottom: 4px;
-  min-width: 0; /* Ensure flex items can shrink below content size */
+  min-width: 0;
   padding: 2px 0;
   font-size: 13px;
 }
 
-/* Remove the default list item marker styling */
 ul.item-list li::before {
   content: none;
 }
 
-/* Specific Projects list styling */
+/* Projects list styling */
 .projects-box ul.item-list {
-  display: block; /* Force block display for continuous list */
+  display: block;
 }
 
 .projects-box ul.item-list li {
-  display: flex; /* Keep flex to align marker */
-  margin-bottom: 5px; /* Add spacing between project items */
-  white-space: normal; /* Allow text wrapping for long project names */
+  display: flex;
+  margin-bottom: 5px;
+  white-space: normal;
   line-height: 1.5;
-  position: relative; /* For highlight marker */
-  padding: 2px 5px; /* Add padding for hover effect */
-  border-radius: 3px; /* Slightly rounded corners */
-  transition: background-color 0.15s ease; /* Smooth transitions */
+  position: relative;
+  padding: 2px 5px;
+  border-radius: 3px;
+  transition: background-color 0.15s ease;
 }
 
 .projects-box ul.item-list li::before {
-  content: none; /* Remove default marker since we're using spans */
+  content: none;
 }
 
 /* Active item styling */
@@ -432,17 +391,15 @@ ul.item-list li::before {
 .box-content .experience-entry.active {
   color: var(--highlight-color);
   background-color: rgba(255, 140, 0, 0.1);
-  position: relative; /* Position relative for absolute left border */
+  position: relative;
   transform: translateX(0px);
   transition: all 0.2s ease;
 }
 
-/* Special handling for active experience entries */
 .box-content .experience-entry.active > div:first-child {
-  color: var(--highlight-color); /* Make job title highlighted */
+  color: var(--highlight-color);
 }
 
-/* Add highlight marker to active items */
 .box-content li.active::after,
 .box-content .experience-entry.active::after {
   content: '';
@@ -454,39 +411,36 @@ ul.item-list li::before {
   background-color: var(--highlight-color);
 }
 
-/* Add hover effect to items */
 .box-content li:hover, 
 .box-content .experience-entry:hover {
   background-color: rgba(15, 74, 156, 0.1);
   cursor: pointer;
 }
 
-/* Enhance the scrollable content for Skills section */
+/* Scrollable content styling */
 .skills-box .scroll-content {
-  max-height: calc(35vh); /* Increased height for Skills */
-  padding-right: 5px; /* Space for scrollbar */
-  padding-bottom: 20px; /* Add space at bottom to prevent content touching footer */
+  max-height: calc(35vh);
+  padding-right: 5px;
+  padding-bottom: 20px;
 }
 
-/* Fix for scrollable content */
 .scroll-content {
   overflow-y: auto;
-  max-height: calc(25vh); /* Maximum height for scrollable sections */
+  max-height: calc(25vh);
   scrollbar-width: thin;
   scrollbar-color: var(--border-color) transparent;
-  padding-bottom: 25px; /* More space for footer */
-  position: relative; /* For z-index */
-  z-index: 2; /* Above lines but below text */
-  margin-bottom: 10px; /* Reduced margin to avoid double spacing */
+  padding-bottom: 25px;
+  position: relative;
+  z-index: 2;
+  margin-bottom: 10px;
 }
 
-/* Further refined responsive design */
+/* Responsive design */
 @media (max-width: 1024px) {
   .sidebar {
     width: 300px;
   }
   
-  /* Keep skills in two columns but make them more compact */
   .skills-box ul.item-list li {
     flex: 0 0 calc(50% - 6px);
     font-size: 13px;
@@ -518,7 +472,6 @@ ul.item-list li::before {
     height: 55vh;
   }
   
-  /* Make experience entries more compact on small screens */
   .experience-entry {
     margin-bottom: 4px;
     padding: 2px 4px;
@@ -537,13 +490,11 @@ ul.item-list li::before {
     left: 1px;
   }
   
-  /* Adjust project items for smaller screens */
   .projects-box ul.item-list li {
     margin-bottom: 3px;
     font-size: 13px;
   }
   
-  /* Keep skills in two columns and make them more compact */
   .skills-box ul.item-list {
     gap: 3px 6px;
   }
@@ -556,8 +507,9 @@ ul.item-list li::before {
 }
 
 @media (max-width: 480px) {
-  /* On very small screens, make everything more compact */
-  .experience-entry, .projects-box ul.item-list li, .skills-box ul.item-list li {
+  .experience-entry, 
+  .projects-box ul.item-list li, 
+  .skills-box ul.item-list li {
     margin-bottom: 2px;
     padding: 1px 3px;
   }
@@ -576,45 +528,36 @@ ul.item-list li::before {
   }
 }
 
-/* ASCII art and special styling */
+/* ASCII art styling */
 .ascii-art {
   font-family: monospace;
   white-space: pre;
-  font-size: 10px; /* Slightly smaller for better fit */
+  font-size: 10px;
   line-height: 1.2;
   margin: 10px 0;
-  overflow: hidden; /* Prevent horizontal scrolling */
-  max-width: 100%; /* Ensure it doesn't overflow */
-  text-align: center; /* Center the ASCII art */
-  display: block; /* Ensure proper block display */
+  overflow: hidden;
+  max-width: 100%;
+  text-align: center;
+  display: block;
 }
 
-/* Fix for extra lines appearing in the boxes */
-
-/* Box separation fix */
+/* Box layout fixes */
 .sidebar-middle-content > .box + .box {
   margin-top: 6px;
   margin-bottom: 6px;
 }
 
-/* Fix box content bottom space */
 .box:last-child .box-content {
-  margin-bottom: 12px; /* Ensure proper space at the bottom */
+  margin-bottom: 12px;
 }
 
-/* Additional fix for the box borders */
 .sidebar-middle-content .box {
   margin-left: 0;
   margin-right: 0;
-  width: 100%; /* Ensure boxes take full width */
+  width: 100%;
 }
 
-/* Fix for skills box to ensure proper alignment and spacing */
-.skills-box .box-content {
-  padding-bottom: 24px; /* Additional padding to prevent content touching footer */
-}
-
-/* Force skills to always display in two columns if possible */
+/* Skills two-column layout */
 @media (min-width: 350px) {
   .skills-box ul.item-list {
     display: flex !important;
@@ -629,32 +572,24 @@ ul.item-list li::before {
   }
 }
 
-/* Final adjustments to eliminate extra lines */
-.box {
-  position: relative;
-  margin-bottom: 6px; /* Consistent spacing */
-}
-
+/* Box refinements */
 .sidebar-middle-content .box {
   margin: 5px 0;
-  /* More precise control over appearance */
   position: relative;
   z-index: 1;
 }
 
-/* Ensure no extra space in the skills section */
 .skills-box .scroll-content {
   margin-bottom: 5px;
   padding-bottom: 20px;
 }
 
-/* Add a border transition effect */
 .box:hover {
   border-color: var(--highlight-color);
   transition: border-color 0.3s ease;
 }
 
-/* Corner links styling - positioned at bottom right */
+/* Corner links styling */
 .corner-links {
   position: fixed;
   bottom: 10px;
@@ -682,7 +617,7 @@ ul.item-list li::before {
   border-color: var(--highlight-color);
 }
 
-/* Add a main section header */
+/* Main content styling */
 .main-box::before {
   content: '';
   position: absolute;
@@ -694,7 +629,6 @@ ul.item-list li::before {
   z-index: 1;
 }
 
-/* Improved main content area styling */
 .main-content {
   padding: 5px;
 }
@@ -747,7 +681,7 @@ ul.item-list li::before {
   border-color: var(--highlight-color);
 }
 
-/* Hide the regular nav-bar when corner links are visible */
+/* Responsive nav display */
 @media (min-width: 768px) {
   .nav-bar {
     display: none;
@@ -760,89 +694,46 @@ ul.item-list li::before {
   }
 }
 
-/* Fix main box header to look like sidebar boxes */
+/* Box styling refinements */
 .main-box .box-header {
   left: 0;
 }
 
-/* Fix any lingering border issues */
-.box {
-  position: relative;
-  border: 1px solid var(--border-color);
-  overflow: visible;
-  margin-bottom: 6px;
-  transition: border-color 0.2s ease;
-}
+/* Box styling refinements */
 
-/* Fix for any remaining border artifacts */
-.sidebar::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: -1px;
-  width: 1px;
-  background-color: var(--border-color);
-  z-index: 3; /* Above everything else */
-}
-
-/* Ensure title text visibility */
 .box-title {
   color: var(--text-color);
   transition: color 0.2s ease;
+  font-weight: 600;
 }
 
-/* Add more space for title and fix line alignment */
 .box-header {
   height: 30px;
 }
 
-/* Make section title a bit more prominent */
-.box-title {
-  font-weight: 600;
-  min-width: 100px; /* Ensure enough space for the title */
-}
-
-/* Fix any padding issues in content areas */
-.main-content-area pre, .main-content-area p {
+.main-content-area pre, 
+.main-content-area p {
   margin-top: 0;
   margin-bottom: 15px;
 }
 
-/* Ensure skills section has proper spacing */
 .skills-box .box-content {
-  padding-bottom: 30px; /* Extra padding to prevent footer overlap */
+  padding-bottom: 30px;
 }
 
-/* Style for keyboard hints in navigation box */
-.keyboard-hints {
-  color: var(--text-color);
-  font-size: 13px;
-  line-height: 1.6;
-  padding: 0px;
-}
-
-.keyboard-hints span {
-  display: inline-block;
-  color: var(--highlight-color);
-  font-weight: 600;
-  margin-right: 3px;
-}
-
-/* Add better styling to navigation box content */
+/* Navigation box styling */
 .navigation-box .box-content {
   padding: 10px 12px;
   margin-top: 12px;
+  margin-bottom: 5px;
 }
 
-
-
-/* Add style for active box */
+/* Active box styling */
 .box.active {
   border-color: var(--highlight-color);
   box-shadow: 0 0 0 1px var(--highlight-color), 0 0 8px 0 rgba(255, 140, 0, 0.3);
   position: relative;
-  z-index: 5; /* Higher z-index to show the active box above others */
+  z-index: 5;
 }
 
 .box.active .box-title {
@@ -851,14 +742,12 @@ ul.item-list li::before {
   font-weight: 700;
 }
 
-/* Add pulse animation to indicate keyboard focus */
 @keyframes pulse-border {
   0% { box-shadow: 0 0 0 1px var(--highlight-color), 0 0 8px 0 rgba(255, 140, 0, 0.3); }
   50% { box-shadow: 0 0 0 1px var(--highlight-color), 0 0 12px 2px rgba(255, 140, 0, 0.5); }
   100% { box-shadow: 0 0 0 1px var(--highlight-color), 0 0 8px 0 rgba(255, 140, 0, 0.3); }
 }
 
-/* Apply animation when using keyboard navigation */
 .box.active.keyboard-nav {
   animation: pulse-border 1.5s infinite;
 }
@@ -907,21 +796,17 @@ ul.item-list li::before {
   transform: translateY(10px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-  pointer-events: none; /* Don't interfere with mouse clicks */
+  pointer-events: none;
 }
 
 #keyboard-tooltip.active {
   opacity: 1;
   transform: translateY(0);
+  animation: tooltip-pulse 2s infinite;
 }
 
-/* Pulse animation for the tooltip to draw attention */
 @keyframes tooltip-pulse {
   0% { border-color: var(--highlight-color); }
   50% { border-color: var(--secondary-highlight); }
   100% { border-color: var(--highlight-color); }
-}
-
-#keyboard-tooltip.active {
-  animation: tooltip-pulse 2s infinite;
 }

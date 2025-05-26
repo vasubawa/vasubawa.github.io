@@ -1,0 +1,190 @@
+:root {
+    --border-color: #333;
+    --header-bg: #111;
+    --box-bg: #0a0a0a;
+    --text-color: #c0c0c0;
+    --highlight-color: #ff8c00;
+    --secondary-highlight: #0f4a9c;
+    --terminal-font: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--box-bg);
+    color: var(--text-color);
+    font-family: var(--terminal-font);
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.terminal-layout {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    border: 5px solid orange;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+.terminal-layout-inner {
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    align-items: stretch;
+}
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 20%;
+    padding: 10px;
+    box-sizing: border-box;
+    border: 2px solid red;
+    flex-shrink: 0;
+}
+
+.sidebar-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    gap: 10px;
+}
+
+.sidebar-box {
+    flex: 1;
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    text-align: center;
+    position: relative;
+    padding: 15px; /* Ensure equal padding inside the box */
+}
+
+.sidebar-box::before {
+    content: attr(data-label);
+    position: absolute;
+    top: -14px; /* Position the text within the border */
+    left: -2px; /* Align the text to the left */
+    background-color: var(--box-bg);
+    color: var(--text-color);
+    font-size: 12px;
+    padding: 3px 5px;
+    text-align: left; /* Align text to the left */
+    z-index: 1
+}
+
+.sidebar-box:nth-child(1) {
+    flex-shrink: 2; /* Allow Box 1 to shrink more aggressively */
+    padding: 15px; /* Ensure equal padding inside the box */
+}
+
+.sidebar-box:nth-child(1)::before {
+    border: 2px solid red; 
+}
+
+.sidebar-box:nth-child(2),
+.sidebar-box:nth-child(3),
+.sidebar-box:nth-child(4) {
+    flex-grow: 2; /* Allow these boxes to take up more space equally */
+    flex-shrink: 1; /* Allow shrinking if necessary */
+    padding: 15px; /* Ensure equal padding inside the box */
+}
+
+.sidebar-box:nth-child(2)::before {
+    border: 2px solid orange; 
+}
+
+.sidebar-box:nth-child(3)::before {
+    border: 2px solid yellow; 
+}
+
+.sidebar-box:nth-child(4)::before {
+    border: 2px solid green; 
+}
+
+.sidebar-box:nth-child(5)::before {
+    border: 2px solid blue; 
+}
+
+.sidebar-box:last-child {
+    margin-bottom: 0;
+}
+
+.sidebar-box:nth-child(1),
+.sidebar-box:nth-child(5) {
+    flex-shrink: 1; /* Allow these boxes to shrink height-wise */
+}
+
+.sidebar-footer {
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid var(--border-color);
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    height: 100%;
+    padding: 11px;
+    box-sizing: border-box;
+    border: 2px solid purple;
+}
+
+.main-content {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.main-box {
+    width: 100%;
+    height: 100%;
+    background-color: var(--box-bg);
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-color);
+    text-align: center;
+}
+
+.main-footer {
+    background-color: var(--header-bg);
+    color: var(--text-color);
+    text-align: center;
+    padding: 10px;
+    border-top: 2px solid var(--border-color);
+}
+
+.footer {
+    height: 50px;
+    border: 2px solid pink;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
