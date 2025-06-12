@@ -6,6 +6,13 @@
     --highlight-color: #ff8c00;
     --secondary-highlight: #0f4a9c;
     --terminal-font: 'JetBrains Mono', 'Fira Mono', 'Consolas', monospace;
+    
+    --border-width: 0.125rem;
+    --label-font-size: 0.75rem;
+    --box-padding: 0.9375rem;
+    --layout-padding: 0.625rem;
+    --layout-gap: 0.625rem;
+    --terminal-border: 0.3125rem;
 }
 
 body {
@@ -14,7 +21,7 @@ body {
     background-color: var(--box-bg);
     color: var(--text-color);
     font-family: var(--terminal-font);
-    font-size: 14px;
+    font-size: 0.875rem;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,15 +35,18 @@ body {
     flex-direction: column;
     height: 100%;
     width: 100%;
-    border: 5px solid orange;
     box-sizing: border-box;
-    padding: 10px;
+    padding: var(--layout-padding);
+}
+
+.terminal-border {
+    border: var(--terminal-border) solid rgb(35, 221, 66);
 }
 
 .terminal-layout-inner {
     display: flex;
     flex: 1;
-    gap: 10px;
+    gap: var(--layout-gap);
     align-items: stretch;
 }
 
@@ -52,76 +62,117 @@ body {
     justify-content: space-between;
     height: 100%;
     width: 20%;
-    padding: 10px;
+    padding: var(--layout-padding);
     box-sizing: border-box;
-    border: 2px solid red;
     flex-shrink: 0;
+}
+
+.sidebar-border {
+    border: var(--border-width) solid rgb(4, 245, 172);
 }
 
 .sidebar-content {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
-    gap: 10px;
+    gap: var(--layout-gap);
+}
+
+.sidebar-item {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: -0.75rem;
+}
+
+.sidebar-item:first-child {
+    margin-top: 0;
+}
+
+.sidebar-label {
+    background-color: var(--box-bg);
+    color: var(--text-color);
+    font-size: var(--label-font-size);
+    padding: 0.1875rem 0.3125rem;
+    text-align: left;
+    z-index: 2;
+    box-sizing: border-box;
+    margin-left: -0rem;
+    margin-bottom: -0.125rem;
+    width: fit-content;
+    border: var(--border-width) solid;
 }
 
 .sidebar-box {
     flex: 1;
     background-color: var(--box-bg);
-    border: 1px solid var(--border-color);
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--text-color);
     text-align: center;
-    position: relative;
-    padding: 15px; /* Ensure equal padding inside the box */
+    padding: var(--box-padding);
+    box-sizing: border-box;
+    border: var(--border-width) solid;
 }
 
-.sidebar-box::before {
-    content: attr(data-label);
-    position: absolute;
-    top: -14px; /* Position the text within the border */
-    left: -2px; /* Align the text to the left */
-    background-color: var(--box-bg);
-    color: var(--text-color);
-    font-size: 12px;
-    padding: 3px 5px;
-    text-align: left; /* Align text to the left */
-    z-index: 1
+/* Label color classes */
+.sidebar-label-red {
+    border-color: red;
 }
 
-.sidebar-box:nth-child(1) {
-    flex-shrink: 2; /* Allow Box 1 to shrink more aggressively */
-    padding: 15px; /* Ensure equal padding inside the box */
+.sidebar-label-orange {
+    border-color: orange;
 }
 
-.sidebar-box:nth-child(1)::before {
-    border: 2px solid red; 
+.sidebar-label-yellow {
+    border-color: yellow;
 }
 
-.sidebar-box:nth-child(2),
-.sidebar-box:nth-child(3),
-.sidebar-box:nth-child(4) {
-    flex-grow: 2; /* Allow these boxes to take up more space equally */
-    flex-shrink: 1; /* Allow shrinking if necessary */
-    padding: 15px; /* Ensure equal padding inside the box */
+.sidebar-label-green {
+    border-color: green;
 }
 
-.sidebar-box:nth-child(2)::before {
-    border: 2px solid orange; 
+.sidebar-label-blue {
+    border-color: blue;
 }
 
-.sidebar-box:nth-child(3)::before {
-    border: 2px solid yellow; 
+/* Box color classes */
+.sidebar-box-red {
+    border-color: red;
 }
 
-.sidebar-box:nth-child(4)::before {
-    border: 2px solid green; 
+.sidebar-box-orange {
+    border-color: orange;
 }
 
-.sidebar-box:nth-child(5)::before {
-    border: 2px solid blue; 
+.sidebar-box-yellow {
+    border-color: yellow;
+}
+
+.sidebar-box-green {
+    border-color: green;
+}
+
+.sidebar-box-blue {
+    border-color: blue;
+}
+
+/* Individual item flex control */
+.sidebar-item:nth-child(1) {
+    flex-shrink: 2;
+}
+
+.sidebar-item:nth-child(2),
+.sidebar-item:nth-child(3),
+.sidebar-item:nth-child(4) {
+    flex-grow: 2;
+    flex-shrink: 1;
+}
+
+.sidebar-item:nth-child(5) {
+    flex-shrink: 1;
 }
 
 .sidebar-box:last-child {
@@ -130,15 +181,15 @@ body {
 
 .sidebar-box:nth-child(1),
 .sidebar-box:nth-child(5) {
-    flex-shrink: 1; /* Allow these boxes to shrink height-wise */
+    flex-shrink: 1; 
 }
 
 .sidebar-footer {
     background-color: var(--header-bg);
     color: var(--text-color);
     text-align: center;
-    padding: 10px;
-    border-top: 2px solid var(--border-color);
+    padding: 0.625rem;
+    border-top: var(--border-width) solid var(--border-color);
 }
 
 .main {
@@ -147,9 +198,12 @@ body {
     justify-content: space-between;
     flex: 1;
     height: 100%;
-    padding: 11px;
+    padding: 0.6875rem; 
     box-sizing: border-box;
-    border: 2px solid purple;
+}
+
+.main-border {
+    border: var(--border-width) solid purple;
 }
 
 .main-content {
@@ -163,28 +217,35 @@ body {
     width: 100%;
     height: 100%;
     background-color: var(--box-bg);
-    border: 1px solid var(--border-color);
+    border: 0.0625rem solid var(--border-color); 
     display: flex;
     justify-content: center;
     align-items: center;
     color: var(--text-color);
     text-align: center;
+}
+
+.main-box-border {
+    border: var(--border-width) solid purple !important;
 }
 
 .main-footer {
     background-color: var(--header-bg);
     color: var(--text-color);
     text-align: center;
-    padding: 10px;
-    border-top: 2px solid var(--border-color);
+    padding: 0.625rem;
+    border-top: var(--border-width) solid var(--border-color);
 }
 
 .footer {
-    height: 50px;
-    border: 2px solid pink;
+    height: 3.125rem;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 10px;
+    margin-top: var(--layout-gap);
+}
+
+.footer-border {
+    border: var(--border-width) solid pink;
 }
