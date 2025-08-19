@@ -1,10 +1,10 @@
 {
     "welcome": "Hello! I'm Test Dev, a passionate software developer from Seattle, crafting innovative digital solutions.",
-    "navigation": [
-        {"id": "welcome", "label": "Welcome"},
-        {"id": "work", "label": "Work"},
-        {"id": "creations", "label": "Creations"},
-        {"id": "expertise", "label": "Expertise"}
+    "controls": [
+        {"key": "↑", "action": "Move up in selection"},
+        {"key": "↓", "action": "Move down in selection"},
+        {"key": "Enter", "action": "Select item"},
+        {"key": "Esc", "action": "Return to main menu"}
     ],
     "primaryContent": [
         "Hi! I'm Test Dev, a coding enthusiast with a love for building systems.",
@@ -41,7 +41,10 @@
         "React",
         "Kubernetes",
         "Linux"
+    ],
+    "links": [
+        {"name": "GitHub", "url": "https://github.com/testdev"},
+        {"name": "X", "url": "https://x.com/testdev"},
+        {"name": "LinkedIn", "url": "https://linkedin.com/in/testdev"}
     ]
 }
-
-

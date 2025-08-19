@@ -11,41 +11,45 @@
 </head>
 <body class="dev-mode dark-theme">
     <div class="terminal-layout">
+        <div class="header">
+            <div class="header-content">Test Dev - Software Developer</div>
+        </div>
         <div class="terminal-layout-inner">
             <div class="sidebar">
                 <div class="sidebar-border">
                     <div class="sidebar-content">
                         <div class="sidebar-item" id="welcome">
                             <div class="sidebar-label sidebar-label-blue">Welcome</div>
-                            <div class="sidebar-box sidebar-box-blue">
+                            <div class="sidebar-box sidebar-box-blue" id="welcome-box">
                                 <p id="welcome-text">Loading...</p>
-                            </div>
-                        </div>
-                        <div class="sidebar-item" id="navigation">
-                            <div class="sidebar-label sidebar-label-orange">Navigation</div>
-                            <div class="sidebar-box sidebar-box-orange">
-                                <div class="item-list" id="navigation-list"></div>
                             </div>
                         </div>
                         <div class="sidebar-item" id="work">
                             <div class="sidebar-label sidebar-label-orange">Work</div>
-                            <div class="sidebar-box sidebar-box-orange">
+                            <div class="sidebar-box sidebar-box-orange has-counter">
                                 <div class="item-counter">1 of <span id="work-total">0</span></div>
                                 <div class="item-list" id="work-list"></div>
                             </div>
                         </div>
                         <div class="sidebar-item" id="creations">
                             <div class="sidebar-label sidebar-label-yellow">Creations</div>
-                            <div class="sidebar-box sidebar-box-yellow">
+                            <div class="sidebar-box sidebar-box-yellow has-counter">
                                 <div class="item-counter">1 of <span id="creations-total">0</span></div>
                                 <div class="item-list" id="creations-list"></div>
                             </div>
                         </div>
                         <div class="sidebar-item" id="expertise">
                             <div class="sidebar-label sidebar-label-green">Expertise</div>
-                            <div class="sidebar-box sidebar-box-green">
+                            <div class="sidebar-box sidebar-box-green has-counter">
                                 <div class="item-counter">1 of <span id="expertise-total">0</span></div>
                                 <div class="item-list" id="expertise-list"></div>
+                            </div>
+                        </div>
+                        <div class="sidebar-item" id="navigation">
+                            <div class="sidebar-label sidebar-label-orange">Navigation</div>
+                            <div class="sidebar-box sidebar-box-orange has-counter" id="navigation-box">
+                                <div class="item-counter">1 of <span id="navigation-total">0</span></div>
+                                <div class="item-list" id="navigation-list"></div>
                             </div>
                         </div>
                     </div>
@@ -66,16 +70,18 @@
             </div>
         </div>
         <div class="footer">
-            <div class="footer-item">Test Dev &copy; 2025</div>
-            <div class="footer-item">
-                <a href="https://github.com/testdev" target="_blank">GitHub</a>
-                <a href="https://x.com/testdev" target="_blank">X</a>
+            <div class="footer-left">Test Dev &copy; 2025</div>
+            <div class="footer-center">
+                <a href="https://github.com/testdev" target="_blank">GitHub</a> |
+                <a href="https://x.com/testdev" target="_blank">X</a> |
                 <a href="https://linkedin.com/in/testdev" target="_blank">LinkedIn</a>
             </div>
-            <select id="style-switcher">
-                <option value="dark-theme">Dark Mode</option>
-                <option value="light-theme">Light Mode</option>
-            </select>
+            <div class="footer-right">
+                <select id="style-switcher">
+                    <option value="dark-theme">Dark</option>
+                    <option value="light-theme">Light</option>
+                </select>
+            </div>
         </div>
     </div>
     <div class="error-message" style="display: none; text-align: center; color: red;">
