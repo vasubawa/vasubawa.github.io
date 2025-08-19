@@ -1,10 +1,12 @@
 {
     "welcome": "Hello! I'm Test Dev, a passionate software developer from Seattle, crafting innovative digital solutions.",
     "controls": [
-        {"key": "↑", "action": "Move up in selection"},
-        {"key": "↓", "action": "Move down in selection"},
-        {"key": "Enter", "action": "Select item"},
-        {"key": "Esc", "action": "Return to main menu"}
+        {"key": "1-4", "action": "Jump to section"},
+        {"key": "h/l", "action": "Navigate left/right"},
+        {"key": "j/k", "action": "Navigate up/down"},
+        {"key": "←/→", "action": "Navigate between sections"},
+        {"key": "↑/↓", "action": "Navigate within section"},
+        {"key": "Enter", "action": "Select item"}
     ],
     "primaryContent": [
         "Hi! I'm Test Dev, a coding enthusiast with a love for building systems.",
