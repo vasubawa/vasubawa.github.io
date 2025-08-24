@@ -2,25 +2,18 @@ import { useState } from 'react'
 import './App.css'
 
 /**
- * Simple PDF Viewer using iframe
+ * Button component with click counter functionality
  * @param {Object} props - Component props
- * @param {string} props.pdfUrl - URL or path to the PDF file
- * @returns {JSX.Element} PDF viewer component
+ * @param {number} props.initialCount - Initial count value
+ * @returns {JSX.Element} Button component
  */
-function SimplePDFViewer({ pdfUrl }) {
+function CounterButton({ initialCount = 0 }) {
+  const [count, setCount] = useState(initialCount)
+  
   return (
-    <div className="pdf-viewer">
-      <iframe
-        src={pdfUrl}
-        width="100%"
-        height="100%"
-        title="PDF Resume"
-        style={{
-          border: 'none',
-          minHeight: '80vh',
-        }}
-      />
-    </div>
+    <button onClick={() => setCount((prev) => prev + 1)}>
+      count is {count}
+    </button>
   )
 }
 
@@ -43,8 +36,11 @@ function App() {
       </header>
       
       <main className="app-content">
-        <div className="pdf-container">
-          <SimplePDFViewer pdfUrl="/Resume.pdf" />
+        <div className="card">
+          <CounterButton initialCount={0} />
+          <p>
+            Welcome to my portfolio site! Use the toggle button to switch views.
+          </p>
         </div>
       </main>
     </div>

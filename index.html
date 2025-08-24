@@ -29,6 +29,17 @@
 			<div class="loading-spinner"></div>
 		</div>
 
+		<!-- PDF Resume Viewer (Main Content) -->
+		<div id="pdf-container" class="pdf-container">
+			<iframe 
+				src="/Resume.pdf" 
+				width="100%" 
+				height="100%" 
+				title="Resume PDF"
+				style="border: none; min-height: 90vh;">
+			</iframe>
+		</div>
+
 		<!-- Toggle Button (Top Right) -->
 		<div class="view-toggle-corner">
 			<button id="toggle-view" class="toggle-button gui-mode">
@@ -37,8 +48,8 @@
 			</button>
 		</div>
 
-		<!-- React App (GUI View) -->
-		<div id="root"></div>
+		<!-- React App (GUI View) - Hidden by default now -->
+		<div id="root" style="display: none;"></div>
 
 		<!-- Terminal View (Hidden by default) -->
 		<div id="terminal-container" style="display: none">
