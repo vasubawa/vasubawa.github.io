@@ -5,9 +5,22 @@
 		<link rel="icon" type="image/svg+xml" href="/vite.svg" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<title>Portfolio</title>
-		<link rel="stylesheet" href="./src/index.css" />
+		<!-- <link rel="stylesheet" href="./src/index.css" /> -->
+		<style>
+			body {
+				margin: 0;
+				padding: 0;
+				width: 100vw;
+				height: 100vh;
+				overflow: hidden;
+			}
+			.pdf-container {
+				width: 100%;
+				height: 100vh;
+			}
+		</style>
 		<!-- Inline script to prevent flash of incorrect view on load/refresh -->
-		<script>
+		<!-- <script>
 			(function () {
 				// Check localStorage immediately before any content renders
 				try {
@@ -22,12 +35,12 @@
 					// Ignore errors, default to GUI view
 				}
 			})();
-		</script>
+		</script> -->
 	</head>
 	<body>
-		<div id="loading" class="loading">
+		<!-- <div id="loading" class="loading">
 			<div class="loading-spinner"></div>
-		</div>
+		</div> -->
 
 		<!-- PDF Resume Viewer (Main Content) -->
 		<div id="pdf-container" class="pdf-container">
@@ -36,29 +49,29 @@
 				width="100%" 
 				height="100%" 
 				title="Resume PDF"
-				style="border: none; min-height: 90vh;">
+				style="border: none;">
 			</iframe>
 		</div>
 
 		<!-- Toggle Button (Top Right) -->
-		<div class="view-toggle-corner">
+		<!-- <div class="view-toggle-corner">
 			<button id="toggle-view" class="toggle-button gui-mode">
 				<span class="toggle-icon">&#9002;</span>
 				<span class="toggle-text">Terminal View</span>
 			</button>
-		</div>
+		</div> -->
 
 		<!-- React App (GUI View) - Hidden by default now -->
-		<div id="root" style="display: none;"></div>
+		<!-- <div id="root" style="display: none;"></div> -->
 
 		<!-- Terminal View (Hidden by default) -->
-		<div id="terminal-container" style="display: none">
+		<!-- <div id="terminal-container" style="display: none">
 			<iframe id="terminal-frame" src="terminal.html"></iframe>
-		</div>
+		</div> -->
 
 		<!-- Load portfolio data -->
-		<script type="module" src="portfolio-data.js"></script>
+		<!-- <script type="module" src="portfolio-data.js"></script>
 		<script type="module" src="./src/main.jsx"></script>
-		<script type="module" src="./src/index.js"></script>
+		<script type="module" src="./src/index.js"></script> -->
 	</body>
 </html>
