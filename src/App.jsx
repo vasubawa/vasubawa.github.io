@@ -1,21 +1,26 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 /**
- * Button component with click counter functionality
+ * Simple PDF Viewer using iframe
  * @param {Object} props - Component props
- * @param {number} props.initialCount - Initial count value
- * @returns {JSX.Element} Button component
+ * @param {string} props.pdfUrl - URL or path to the PDF file
+ * @returns {JSX.Element} PDF viewer component
  */
-function CounterButton({ initialCount = 0 }) {
-  const [count, setCount] = useState(initialCount)
-  
+function SimplePDFViewer({ pdfUrl }) {
   return (
-    <button onClick={() => setCount((prev) => prev + 1)}>
-      count is {count}
-    </button>
+    <div className="pdf-viewer">
+      <iframe
+        src={pdfUrl}
+        width="100%"
+        height="100%"
+        title="PDF Resume"
+        style={{
+          border: 'none',
+          minHeight: '80vh',
+        }}
+      />
+    </div>
   )
 }
 
@@ -24,32 +29,23 @@ function CounterButton({ initialCount = 0 }) {
  * @returns {JSX.Element} App component
  */
 function App() {
-  // Get data from window.portfolioData if available
-  const data = typeof window !== 'undefined' ? window.portfolioData : null;
   return (
     <div className="app-container">
       <header className="app-header">
-        <div className="logo-container">
-          <a href="https://vite.dev" target="_blank" rel="noreferrer">
-            <img src={viteLogo} className="logo" alt="Vite logo" />
-          </a>
-          <a href="https://react.dev" target="_blank" rel="noreferrer">
-            <img src={reactLogo} className="logo react" alt="React logo" />
-          </a>
+        <div className="terminal-button-container">
+          <button 
+            className="terminal-button"
+            onClick={() => window.location.href = 'terminal.html'}
+          >
+            Terminal View
+          </button>
         </div>
       </header>
       
       <main className="app-content">
-        <div className="card">
-          <CounterButton initialCount={0} />
-          <p>
-            Welcome to my portfolio site! Use the toggle button in the top-right corner to switch views.
-          </p>
+        <div className="pdf-container">
+          <SimplePDFViewer pdfUrl="/Resume.pdf" />
         </div>
-        
-        <p className="read-the-docs">
-          {data?.quotes ? data.quotes[Math.floor(Math.random() * data.quotes.length)] : "The best way to predict the future is to invent it."}
-        </p>
       </main>
     </div>
   )

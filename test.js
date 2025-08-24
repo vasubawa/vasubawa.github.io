@@ -19,23 +19,8 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!itemList) return;
 
             const boxRect = box.getBoundingClientRect();
-            const boxHeight = boxRect.height;
             const boxWidth = boxRect.width;
             const items = itemList.tagName === 'P' ? [itemList] : itemList.querySelectorAll('div');
-            const itemCount = items.length;
-
-            // Estimate content height
-            const lineHeight = parseFloat(getComputedStyle(itemList).fontSize) * 1.3;
-            const contentHeight = itemCount * lineHeight + 0.6 * 16; // Account for padding
-
-            // Adjust font size if content exceeds box height
-            if (contentHeight > boxHeight) {
-                const scaleFactor = boxHeight / contentHeight;
-                const newFontSize = Math.max(0.5, parseFloat(getComputedStyle(itemList).fontSize) / 16 * scaleFactor);
-                itemList.style.fontSize = `${newFontSize}rem`;
-            } else {
-                itemList.style.fontSize = ''; // Reset to default
-            }
 
             // Ensure content fits width
             items.forEach(item => {
@@ -133,6 +118,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             } else {
                 primaryText.innerHTML = '<p>No primary content available</p>';
+            }
+
+            // Load links for footer
+            const footerCenter = document.getElementById('footer-center');
+            footerCenter.innerHTML = '';
+            if (data.links && Array.isArray(data.links)) {
+                data.links.forEach((link, index) => {
+                    const a = document.createElement('a');
+                    a.href = link.url;
+                    a.target = '_blank';
+                    a.textContent = link.name;
+                    footerCenter.appendChild(a);
+                    if (index < data.links.length - 1) {
+                        footerCenter.appendChild(document.createTextNode(' | '));
+                    }
+                });
+            } else {
+                footerCenter.innerHTML = '<p>No links available</p>';
             }
 
             // Adjust content after loading

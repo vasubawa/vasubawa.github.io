@@ -1,5 +1,5 @@
 {
-    "welcome": "Hello! I'm Dhruv, a passionate software developer from Orlando.",
+    "welcome": "Hello! I'm Test Dev, a passionate software developer from Orlando.",
     "controls": [
         {"key": "1-4", "action": "Jump to section"},
         {"key": "h/l", "action": "Navigate left/right"},
@@ -9,9 +9,12 @@
         {"key": "Enter", "action": "Select item"}
     ],
     "primaryContent": [
-        "Hi! I'm Dhruv, a coding enthusiast with a love for building systems."
+        "Hi! I'm Test Dev, a coding enthusiast with a love for building systems.",
+        "I specialize in backend development but enjoy full-stack and IoT projects.",
+        "Outside coding, I explore robotics and contribute to open-source initiatives.",
+        "Visit my GitHub, X, or LinkedIn to see my work or get in touch!"
     ],
-    "Experience": [
+    "work": [
         {"role": "Senior Developer", "org": "CodeZap"},
         {"role": "UI/UX Developer", "org": "PixelFlow"},
         {"role": "IoT Specialist", "org": "SmartWave Tech"},
@@ -21,7 +24,7 @@
         {"role": "Data Engineer", "org": "InsightCore"},
         {"role": "Security Analyst", "org": "SafeCode Labs"}
     ],
-    "Projects": [
+    "creations": [
         "SyncWave API",
         "DashCraft UI",
         "SmartHome Hub",
@@ -31,7 +34,7 @@
         "Nova Framework",
         "Pulse Analytics"
     ],
-    "Skills - Tools": [
+    "expertise": [
         "Python",
         "JavaScript",
         "Rust",
@@ -42,7 +45,8 @@
         "Linux"
     ],
     "links": [
-        {"name": "GitHub", "url": "https://github.com/vasubawa"},
-        {"name": "LinkedIn", "url": "https://linkedin.com/in/dhruvsharma2000"}
+        {"name": "GitHub", "url": "https://github.com/testdev"},
+        {"name": "X", "url": "https://x.com/testdev"},
+        {"name": "LinkedIn", "url": "https://linkedin.com/in/testdev"}
     ]
 }
