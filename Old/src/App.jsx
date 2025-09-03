@@ -1,12 +1,6 @@
 import { useState } from 'react'
 import './App.css'
 
-/**
- * Button component with click counter functionality
- * @param {Object} props - Component props
- * @param {number} props.initialCount - Initial count value
- * @returns {JSX.Element} Button component
- */
 function CounterButton({ initialCount = 0 }) {
   const [count, setCount] = useState(initialCount)
   
@@ -17,10 +11,6 @@ function CounterButton({ initialCount = 0 }) {
   )
 }
 
-/**
- * Main App component
- * @returns {JSX.Element} App component
- */
 function App() {
   return (
     <div className="app-container">
