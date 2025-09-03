@@ -100,34 +100,46 @@ export default function Home() {
       </div>
       {/* Footer with theme toggle */}
       <div
-        className="col-start-1 col-end-4 row-start-3 rounded-md shadow flex flex-col sm:flex-row items-center justify-between font-bold text-base sm:text-lg py-2 px-2 sm:px-4 border-2 gap-2"
+        className="col-start-1 col-end-4 row-start-3 rounded-md shadow flex flex-col sm:flex-row items-center sm:items-center justify-between font-bold text-base sm:text-lg py-2 px-2 sm:px-4 border-2 gap-2"
         style={{
           background: theme.box,
           borderColor: theme.border,
           borderRadius: theme.borderRadius || '0.5rem',
         }}
       >
-        <span className="mb-2 sm:mb-0">Footer</span>
-        <select
-          value={themeName}
-          onChange={e => setThemeName(e.target.value)}
-          className="w-full sm:w-auto px-2 sm:px-4 py-2 rounded-md shadow-lg font-semibold border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all duration-200"
-          style={{
-            background: theme.accent,
-            color: theme.bg,
-            borderColor: theme.border,
-            minWidth: 120,
-            fontSize: 14,
-            cursor: 'pointer',
-            borderRadius: theme.borderRadius || '0.375rem',
-          }}
-        >
-          {themeNames.map(name => (
-            <option key={name} value={name} style={{ color: theme.fg, background: theme.bg }}>
-              {name}
-            </option>
-          ))}
-        </select>
+        <div className="w-full flex flex-col sm:flex-row items-center justify-between">
+          <div className="w-full flex justify-center mb-2 sm:mb-0">
+            <span className="text-center w-full">Footer</span>
+          </div>
+          <div className="w-full sm:w-auto flex flex-row items-center gap-2 justify-end">
+            <a href="/Old/Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-accent text-xs font-semibold hover:underline" style={{ background: theme.accent, color: theme.bg }}>Resume</a>
+            <a target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-accent text-xs font-semibold hover:underline" style={{ background: theme.accent, color: theme.bg }}>LinkedIn</a>
+            <a target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-accent text-xs font-semibold hover:underline" style={{ background: theme.accent, color: theme.bg }}>GitHub</a>
+            <select
+              value={themeName}
+              onChange={e => setThemeName(e.target.value)}
+              className="px-1 py-1 rounded-md shadow font-semibold border-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-accent transition-all duration-200 text-xs text-center"
+              style={{
+                background: theme.accent,
+                color: theme.bg,
+                borderColor: theme.border,
+                fontSize: 12,
+                cursor: 'pointer',
+                borderRadius: theme.borderRadius || '0.375rem',
+                textAlign: 'center',
+                width: 'auto',
+                minWidth: 0,
+                maxWidth: '100%',
+              }}
+            >
+              {themeNames.map(name => (
+                <option key={name} value={name} style={{ color: theme.fg, background: theme.bg, textAlign: 'center' }}>
+                  {name}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   );
