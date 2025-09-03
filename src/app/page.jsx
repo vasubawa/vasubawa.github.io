@@ -80,15 +80,19 @@ export default function Home() {
         </div>
         {/* Main */}
         <div
-          className="row-start-2 md:row-start-auto col-start-1 md:col-start-2 md:col-end-4 rounded-md shadow flex flex-col items-stretch justify-start border-2 gap-1 xs:gap-2 sm:gap-4 min-h-[120px] md:min-h-[180px] lg:min-h-[240px] flex-1"
+          className="row-start-2 md:row-start-auto col-start-1 md:col-start-2 md:col-end-4 rounded-md shadow flex flex-col items-stretch justify-start border-2 gap-1 xs:gap-2 sm:gap-4 min-h-[120px] md:min-h-[180px] lg:min-h-[240px] flex-1 bg-opacity-80 backdrop-blur-md z-10 relative"
           style={{
             background: theme.box,
             borderColor: theme.border,
             color: theme.fg,
             borderRadius: theme.borderRadius || '0.5rem',
+            boxShadow: `0 4px 24px 0 ${theme.glow}40`,
           }}
         >
-          <div className="w-full text-center font-bold text-base sm:text-lg py-2 px-2 sm:px-4 border-b-2" style={{borderColor: theme.border}}>
+          <div className="w-full text-center font-bold text-base sm:text-lg py-2 px-2 sm:px-4 border-b-2" style={{
+            borderColor: theme.border,
+            color: theme.fg,
+          }}>
             {activeSidebar} - Header
           </div>
           <div className="flex-1 w-full flex items-center justify-center text-xs sm:text-base px-1 sm:px-4">

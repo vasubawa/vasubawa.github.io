@@ -1,14 +1,14 @@
 const themes = {
-  "LazyGit": {
+  LazyGit: {
     bg: "#181825",
     fg: "#e0e0e0",
     accent: "#89b4fa",
-    sidebar: "#232634",
+    sidebar: "#1e1e2e", 
     box: "#1e1e2e",
     border: "#45475a",
-    glow: "#89b4fa",
-    borderRadius: "0.375rem", // rounded-md
-    font: "font-mono"
+    glow: "#89b4fa20", 
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Apple Light": {
     bg: "#f8f8f7",
@@ -17,7 +17,9 @@ const themes = {
     sidebar: "#f2f2f7",
     box: "#ffffff",
     border: "#d1d1d6",
-    glow: "#0071e3",
+    glow: "#0071e340",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Apple Dark": {
     bg: "#1d1d1f",
@@ -26,7 +28,9 @@ const themes = {
     sidebar: "#2c2c2e",
     box: "#232326",
     border: "#3a3a3c",
-    glow: "#2997ff",
+    glow: "#2997ff40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   Nord: {
     bg: "#2E3440",
@@ -35,7 +39,9 @@ const themes = {
     sidebar: "#3B4252",
     box: "#434C5E",
     border: "#81A1C1",
-    glow: "#8FBCBB",
+    glow: "#8FBCBB40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Nord Light": {
     bg: "#ECEFF4",
@@ -44,47 +50,203 @@ const themes = {
     sidebar: "#E5E9F0",
     box: "#D8DEE9",
     border: "#BF616A",
-    glow: "#D08770",
+    glow: "#D0877040",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
-  // Catppuccin Latte combos
+
   "Latte Rosewater": {
-    bg: "#f5e0dc", fg: "#4c4f69", accent: "#dc8a78", sidebar: "#f2cdcd", box: "#f5c2e7", border: "#d20f39", glow: "#dc8a78"
+  bg: "#eff1f5",
+  fg: "#4c4f69",
+  accent: "#dc8a78",
+  sidebar: "#e6e9ef",
+  box: "#ccd0da",
+  border: "#8c8fa1",
+    glow: "#dc8a7840",
+    borderRadius: "0.375rem",
+    font: "font-mono",
+  },
+  "Latte Flamingo": {
+    bg: "#eff1f5",
+    fg: "#4c4f69",
+  accent: "#f2cdcd",
+    sidebar: "#e6e9ef",
+    box: "#ccd0da",
+    border: "#8c8fa1",
+    glow: "#f2cdcd40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Latte Blue": {
-    bg: "#f5e0dc", fg: "#4c4f69", accent: "#1e66f5", sidebar: "#f2cdcd", box: "#babbf1", border: "#1e66f5", glow: "#1e66f5"
+    bg: "#eff1f5",
+    fg: "#4c4f69",
+  accent: "#1e66f5",
+    sidebar: "#e6e9ef",
+    box: "#ccd0da",
+    border: "#8c8fa1",
+    glow: "#1e66f540",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Latte Green": {
-    bg: "#f5e0dc", fg: "#4c4f69", accent: "#40a02b", sidebar: "#f2cdcd", box: "#a6d189", border: "#40a02b", glow: "#40a02b"
+    bg: "#eff1f5",
+    fg: "#4c4f69",
+  accent: "#40a02b",
+    sidebar: "#e6e9ef",
+    box: "#ccd0da",
+    border: "#8c8fa1",
+    glow: "#40a02b40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
-  // Catppuccin Frappe combos
+
   "Frappe Pink": {
-    bg: "#303446", fg: "#c6d0f5", accent: "#f4b8e4", sidebar: "#292c3c", box: "#ca9ee6", border: "#f4b8e4", glow: "#f4b8e4"
+  bg: "#303446",
+  fg: "#c6d0f5",
+  accent: "#f2cdcd",
+  sidebar: "#292c3c",
+  box: "#51576d",
+  border: "#6c7086",
+    glow: "#f2cdcd40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Frappe Teal": {
-    bg: "#303446", fg: "#c6d0f5", accent: "#81c8be", sidebar: "#292c3c", box: "#99d1db", border: "#81c8be", glow: "#81c8be"
+    bg: "#303446",
+    fg: "#c6d0f5",
+  accent: "#81c8be",
+    sidebar: "#292c3c",
+    box: "#51576d",
+    border: "#6c7086",
+    glow: "#81c8be40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Frappe Yellow": {
-    bg: "#303446", fg: "#c6d0f5", accent: "#e5c890", sidebar: "#292c3c", box: "#e5c890", border: "#e5c890", glow: "#e5c890"
+    bg: "#303446",
+    fg: "#c6d0f5",
+  accent: "#e5c890",
+    sidebar: "#292c3c",
+    box: "#51576d",
+    border: "#6c7086",
+    glow: "#e5c89040",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
-  // Catppuccin Macchiato combos
+
   "Macchiato Mauve": {
-    bg: "#24273a", fg: "#cad3f5", accent: "#c6a0f6", sidebar: "#1e2030", box: "#c6a0f6", border: "#c6a0f6", glow: "#c6a0f6"
+  bg: "#24273a",
+  fg: "#cad3f5",
+  accent: "#c6a0f6",
+  sidebar: "#1e2030",
+  box: "#363a4f",
+  border: "#5b6078",
+    glow: "#c6a0f640",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Macchiato Peach": {
-    bg: "#24273a", fg: "#cad3f5", accent: "#f5a97f", sidebar: "#1e2030", box: "#f5a97f", border: "#f5a97f", glow: "#f5a97f"
+    bg: "#24273a",
+    fg: "#cad3f5",
+  accent: "#f5a97f",
+    sidebar: "#1e2030",
+    box: "#363a4f",
+    border: "#5b6078",
+    glow: "#f5a97f40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Macchiato Sapphire": {
-    bg: "#24273a", fg: "#cad3f5", accent: "#7dc4e4", sidebar: "#1e2030", box: "#7dc4e4", border: "#7dc4e4", glow: "#7dc4e4"
+    bg: "#24273a",
+    fg: "#cad3f5",
+  accent: "#7dc4e4",
+    sidebar: "#1e2030",
+    box: "#363a4f",
+    border: "#5b6078",
+    glow: "#7dc4e440",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
-  // Catppuccin Mocha combos
+
+  // Catppuccin Mocha (Updated)
   "Mocha Red": {
-    bg: "#1e1e2e", fg: "#cdd6f4", accent: "#f38ba8", sidebar: "#181825", box: "#f38ba8", border: "#f38ba8", glow: "#f38ba8"
+  bg: "#1e1e2e",
+  fg: "#cdd6f4",
+  accent: "#f38ba8",
+  sidebar: "#181825",
+  box: "#313244",
+  border: "#45475a",
+    glow: "#f38ba840",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Mocha Sky": {
-    bg: "#1e1e2e", fg: "#cdd6f4", accent: "#89dceb", sidebar: "#181825", box: "#89dceb", border: "#89dceb", glow: "#89dceb"
+    bg: "#1e1e2e",
+    fg: "#cdd6f4",
+  accent: "#89dceb",
+    sidebar: "#181825",
+    box: "#313244",
+    border: "#45475a",
+    glow: "#89dceb40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
+  },
+  "Mocha Teal": {
+    bg: "#1e1e2e",
+    fg: "#cdd6f4",
+  accent: "#94e2d5",
+    sidebar: "#181825",
+    box: "#313244",
+    border: "#45475a",
+    glow: "#94e2d540",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
   "Mocha Lavender": {
-    bg: "#1e1e2e", fg: "#cdd6f4", accent: "#b4befe", sidebar: "#181825", box: "#b4befe", border: "#b4befe", glow: "#b4befe"
+    bg: "#1e1e2e",
+    fg: "#cdd6f4",
+  accent: "#b4befe",
+    sidebar: "#181825",
+    box: "#313244",
+    border: "#45475a",
+    glow: "#b4befe40",
+    borderRadius: "0.375rem",
+    font: "font-mono",
+  },
+
+  // New and Renamed Themes
+  TerminalArt: {
+    bg: "#0d1117",
+    fg: "#c9d1d9",
+    accent: "#58a6ff",
+    sidebar: "#141a24",
+    box: "#0d1117",
+    border: "#8090a8",
+    glow: "#58a6ff40",
+    borderRadius: "0.375rem",
+    font: "'Fira Mono', monospace",
+  },
+  "Tokyo Night": {
+    bg: "#1a1b26",
+    fg: "#a9b1d6",
+    accent: "#7aa2f7",
+    sidebar: "#24283b",
+    box: "#1a1b26",
+    border: "#414868",
+    glow: "#7aa2f740",
+    borderRadius: "0.375rem",
+    font: "font-mono",
+  },
+  "Solarized Dark": {
+    bg: "#002b36",
+    fg: "#839496",
+    accent: "#2aa198",
+    sidebar: "#073642",
+    box: "#002b36",
+    border: "#586e75",
+    glow: "#2aa19840",
+    borderRadius: "0.375rem",
+    font: "font-mono",
   },
 };
 
