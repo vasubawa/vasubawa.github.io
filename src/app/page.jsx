@@ -112,7 +112,7 @@ export default function Home() {
             <span className="text-center w-full">Footer</span>
           </div>
           <div className="w-full sm:w-auto flex flex-row items-center gap-2 justify-end">
-            <a href="/Old/Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-accent text-xs font-semibold hover:underline" style={{ background: theme.accent, color: theme.bg }}>Resume</a>
+            <a href="localhost:3000//Old/Resume.pdf" target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-accent text-xs font-semibold hover:underline" style={{ background: theme.accent, color: theme.bg }}>Resume</a>
             <a target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-accent text-xs font-semibold hover:underline" style={{ background: theme.accent, color: theme.bg }}>LinkedIn</a>
             <a target="_blank" rel="noopener noreferrer" className="px-2 py-1 rounded bg-accent text-xs font-semibold hover:underline" style={{ background: theme.accent, color: theme.bg }}>GitHub</a>
             <select
