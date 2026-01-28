@@ -24,19 +24,21 @@
     </nav>
     <form>
         <h2>Contact Information</h2>
-        <label>Name: <input type="text" required></label><br>
-        <label>Phone: <input type="tel" required></label><br>
-        <label>Email: <input type="email" required></label><br>
+        <label for="name">Name:</label>
+        <input id="name" type="text" required><br>
+        <label for="phone">Phone:</label>
+        <input id="phone" type="tel" required><br>
+        <label for="email">Email:</label>
+        <input id="email" type="email" required><br>
 
         <h2>Select Pizza Size</h2>
-        <label>Pizza Size: 
-        <select required>
+        <label for="size">Pizza Size:</label>
+        <select id="size" required>
             <option value="">--Select Size--</option>
             <option>Medium</option>
             <option>Large</option>
             <option>XLarge</option>
-        </select>
-        </label><br>
+        </select><br>
 
         <h2>Select Sauce</h2>
         <label><input type="radio" required> Marinara</label><br>
