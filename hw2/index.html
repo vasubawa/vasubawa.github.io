@@ -1,0 +1,96 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Pizza Ordering Form</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            border: 3px double #000;
+        }
+        th, td {
+            border: 1px solid #000;
+            padding: 4px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pizza Ordering Form</h1>
+    <nav>
+        <ul>
+            <li><a href="../index.html">Home</a></li>
+        </ul>
+    </nav>
+    <form>
+        <h2>Contact Information</h2>
+        <label>Name: <input type="text" required></label><br>
+        <label>Phone: <input type="tel" required></label><br>
+        <label>Email: <input type="email" required></label><br>
+
+        <h2>Select Pizza Size</h2>
+        <label>Pizza Size: 
+        <select required>
+            <option value="">--Select Size--</option>
+            <option>Medium</option>
+            <option>Large</option>
+            <option>XLarge</option>
+        </select>
+        </label><br>
+
+        <h2>Select Sauce</h2>
+        <label><input type="radio" required> Marinara</label><br>
+        <label><input type="radio"> Ranch</label><br>
+        <label><input type="radio"> No Sauce</label><br>
+
+        <h2>Select Toppings</h2>
+        <label><input type="checkbox"> Pepperoni</label>
+        <label><input type="checkbox"> Sausage</label><br>
+        <label><input type="checkbox"> Mushroom</label>
+        <label><input type="checkbox"> Pineapple</label><br>
+        <label><input type="checkbox"> Peppers</label>
+        <label><input type="checkbox"> Onions</label><br>
+
+        <h2>Additional Instructions</h2>
+        <label>Add instructions<br>
+        <textarea></textarea></label><br>
+        <input type="submit" value="Submit">
+    </form>
+
+    <h2>List of My Favorite Games</h2>
+    <table>
+        <tr>
+            <th>Developer</th>
+            <th>Title</th>
+            <th>Year</th>
+            <th>Genre</th>
+        </tr>
+        <tr>
+            <td>Mojang</td>
+            <td>Minecraft</td>
+            <td>2011</td>
+            <td>Sandbox</td>
+        </tr>
+        <tr>
+            <td>Digital Extremes</td>
+            <td>Warframe</td>
+            <td>2013</td>
+            <td>Shooter</td>
+        </tr>
+        <tr>
+            <td>Paradox Interactive</td>
+            <td>Stellaris</td>
+            <td>2016</td>
+            <td rowspan="2">Space</td>
+        </tr>
+        <tr>
+            <td>Hello Games</td>
+            <td>No Man's Sky</td>
+            <td>2016</td>
+        </tr>
+        <tr>
+            <td colspan="4">Count: 4</td>
+        </tr>
+    </table>
+</body>
+</html>
