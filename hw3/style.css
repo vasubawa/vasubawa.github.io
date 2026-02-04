@@ -1,0 +1,65 @@
+body {
+    background-color: #add8e6;
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 72px;
+    margin: 10px 0 20px 0;
+}
+
+h2 {
+    font-size: 38px;
+    margin: 10px 0;
+}
+
+#paragraph2 {
+    background-color: white;
+    border: 6px solid #008000;
+    width: 78%;
+    padding: 22px 28px;
+    line-height: 1.9;
+    margin: 20px 0 20px 20px;
+    box-sizing: border-box;
+}
+
+.blue {
+    background-color: #00008b;
+    color: white;
+    padding: 18px;
+    margin: 18px 0;
+}
+
+ol { list-style-type: decimal-leading-zero; }
+
+ol li::marker { font-size: 1.2em; font-weight: 400; }
+
+ol li a {
+    color: #0000FF;
+    text-decoration: underline;
+}
+
+section p a {
+    color: #d22;
+    font-weight: bold;
+}
+
+table {
+    border-collapse: collapse;
+    width: 50%;
+    background-color: white;
+}
+table, th, td {
+    border: 1px solid black;
+}
+th {
+    background-color: #d3d3d3;
+    padding: 10px;
+    text-align: left;
+}
+td {
+    padding: 8px;
+    background-color: #ffffff;
+}
