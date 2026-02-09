@@ -1,0 +1,146 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+}
+
+#jumpMenu {
+    background-color: #daa520;
+    width: 200px;
+    padding: 20px;
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    z-index: 100;
+}
+
+#jumpMenu h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 18px;
+}
+
+#jumpMenu a {
+    display: block;
+    color: #0066FF;
+    text-decoration: underline;
+    margin: 15px 0;
+    text-align: center;
+}
+
+#jumpMenu a:hover {
+    color: #0050cc;
+}
+
+main {
+    margin-left: 200px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #FF0000;
+    padding: 20px;
+    text-align: center;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 200px;
+    right: 0;
+    z-index: 90;
+}
+
+header p {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+header nav {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+}
+
+header nav button {
+    background-color: #0000FF;
+    color: white;
+    border: 2px solid black;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+header nav button:hover {
+    background-color: #0000cc;
+}
+
+h1 {
+    text-align: center;
+    font-size: 36px;
+    padding: 20px;
+    margin-top: 120px;
+}
+
+#container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 20px 40px;
+    justify-content: center;
+}
+
+article {
+    width: 300px;
+    padding: 20px;
+}
+
+article h2 {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+article p {
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    text-align: justify;
+}
+
+article a {
+    color: #0066FF;
+    text-decoration: underline;
+}
+
+article a:hover {
+    color: #0050cc;
+}
+
+#thanks {
+    background-color: #87cefa;
+    color: black;
+    padding: 30px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: auto;
+    z-index: 95;
+}
+
+footer {
+    background-color: #f0f0f0;
+    padding: 20px;
+    text-align: center;
+    font-size: 12px;
+}
