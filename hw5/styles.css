@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+#menuItems {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 14%;
+    height: 100vh;
+    background: black;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    z-index: 1000;
+}
+
+#menuItems button {
+    background: blue;
+    color: white;
+    border: none;
+    padding: 15px 0;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+#jumpMenu {
+    list-style: none;
+    margin: 0;
+    padding: 10px;
+    background: #daa520;
+    display: none;
+    text-align: center;
+}
+
+#recentArticles:hover {
+    background: #daa520;
+    color: blue;
+}
+
+#recentArticles:hover + #jumpMenu,
+#jumpMenu:hover {
+    display: block;
+    background: #daa520;
+    color: blue;
+}
+
+#jumpMenu li {
+    margin: 4px 0;
+}
+
+#jumpMenu a {
+    color: blue;
+    text-decoration: none;
+    display: block;
+    padding: 3px;
+    text-align: center;
+}
+
+#jumpMenu a:hover {
+    background: blue;
+    color: black;
+}
+
+main {
+    margin-left: 14%;
+    padding-top: 120px;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 14%;
+    width: calc(100% - 14%);
+    background: red;
+    text-align: center;
+    z-index: 900;
+}
+
+header p {
+    margin: 20px 0;
+    font-size: 28px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 300px);
+    justify-content: center;
+    gap: 40px;
+    padding: 30px;
+}
+
+article {
+    width: 300px;
+    color: #aaa;
+    line-height: 1.5;
+    scroll-margin-top: 150px;
+    transition: color 2s, transform 2s, max-height 2s;
+    overflow: hidden;
+}
+
+article:hover {
+    color: #222;
+    transform: scale(1.05);
+    max-height: 1000px;
+}
+
+article p:first-of-type::first-letter {
+    font-family: "Times New Roman", serif;
+    font-size: 36px;
+}
+
+article p:last-of-type a::after {
+    content: "";
+    display: inline-block;
+    width: 18px;
+    height: 20px;
+    margin-left: 6px;
+    background: url("assets/arrow.png") no-repeat center;
+    background-size: contain;
+}
+
+#thanks {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    background: #87cefa;
+    padding: 15px 25px;
+    font-size: 40px;
+    border: 1px solid #444;
+}
+
+footer {
+    margin: 40px;
+}
