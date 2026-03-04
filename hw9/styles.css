@@ -1,0 +1,21 @@
+:root {
+  --accent-1: #667eea;
+  --accent-2: #764ba2;
+  --bg-1: #f6f8ff;
+  --panel-bg: #fbfdff;
+  --muted: #6b7280;
+  --card-border: #eef3ff;
+  --max-width: 1100px;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: linear-gradient(180deg, var(--bg-1) 0%, #fff 100%);
+  color: #222;
+  padding: 32px;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}

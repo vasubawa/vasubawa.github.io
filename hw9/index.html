@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon Team Builder</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div>
+        <h1>Pokemon Team Builder</h1>
+        <div>
+            <input 
+                type="text" 
+                id="pokemonInput" 
+                placeholder="Enter Pokemon name or ID (1-151)..."
+                autocomplete="off"
+            >
+            <button id="submitBtn">Search Pokemon</button>
+        </div>
+        <div id="pokemonDetails" class="hidden">
+            <div>
+                <div>
+                    <img id="pokemonImage" src="" alt="Pokemon image">
+                </div>
+                <div>
+                    <label for="pokemonAudio">Pokemon Cry:</label>
+                    <audio id="pokemonAudio" controls>
+                        <source id="audioSource" src="" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
+            </div>
+            <div>
+                <h3>Select your moves:</h3>
+                <div>
+                    <div>
+                        <label for="move1">Move 1:</label>
+                        <select id="move1"></select>
+                    </div>
+                    <div>
+                        <label for="move2">Move 2:</label>
+                        <select id="move2"></select>
+                    </div>
+                    <div>
+                        <label for="move3">Move 3:</label>
+                        <select id="move3"></select>
+                    </div>
+                    <div>
+                        <label for="move4">Move 4:</label>
+                        <select id="move4"></select>
+                    </div>
+                </div>
+                <button id="addToTeamBtn">Add to Team</button>
+            </div>
+        </div>
+        <div id="teamSection" class="hidden">
+            <h2>Your Pokemon Team</h2>
+            <div id="teamList"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
